@@ -200,28 +200,29 @@
           <div class="mt-4 rounded-xl border border-white/10 bg-white/[.025] p-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <div class="mono text-[10px] tracking-widest text-slate-400">OUTPUT INSPECTOR</div>
-                <div class="mt-1 text-[11px] text-slate-500">Generated locally from the selected scenario</div>
+                <div class="mono text-[10px] tracking-widest text-slate-400">YOUR RESULTS</div>
+                <div class="mt-1 text-[11px] text-slate-500">See what happened, then view or download the files created by the run.</div>
               </div>
               <div class="flex flex-wrap gap-2">
-                <button id="sim-copy" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Copy output</button>
-                <button id="sim-download" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Download file ↧</button>
+                <button id="sim-copy" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Copy result</button>
+                <button id="sim-download" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Download generated file ↧</button>
               </div>
             </div>
-            <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Output inspector view">
-              <button id="sim-output-payload-tab" type="button" role="tab" aria-selected="true" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Structured JSON Payload</button>
-              <button id="sim-output-file-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Output File <span class="mono text-[9px]">(.jsonl / .json)</span></button>
+            <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Choose how to view your results">
+              <button id="sim-output-summary-tab" type="button" role="tab" aria-selected="true" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Simple summary</button>
+              <button id="sim-output-payload-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Technical data (JSON)</button>
+              <button id="sim-output-file-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Generated file</button>
             </div>
             <div id="sim-output-content" class="mt-3 overflow-hidden rounded-lg border border-white/10 bg-[#050d17]" role="tabpanel" aria-live="polite">
               <div class="flex items-center justify-between border-b border-white/10 px-3 py-2">
-                <span id="sim-output-filename" class="mono text-[9px] text-cyan">structured_payload.json</span>
-                <span id="sim-output-state" class="mono text-[8px] text-slate-600">NOT GENERATED</span>
+                <span id="sim-output-filename" class="mono text-[9px] text-cyan">Result summary</span>
+                <span id="sim-output-state" class="mono text-[8px] text-slate-600">RUN THE PIPELINE</span>
               </div>
-              <pre id="sim-output-code" class="sim-code min-h-40 max-h-80 p-4 mono text-[10px] leading-6 text-slate-400">{
-  "message": "Run the pipeline to generate a structured result.",
-  "execution": "browser-local",
-  "external_calls": false
-}</pre>
+              <div id="sim-output-summary" class="p-4">
+                <div class="text-sm font-semibold text-slate-200">Your results will appear here.</div>
+                <p class="mt-2 text-xs leading-6 text-slate-400">Choose a scenario and select <strong class="font-semibold text-slate-200">Run Pipeline</strong>. We’ll explain whether the invoice passed its checks or needs review.</p>
+              </div>
+              <pre id="sim-output-code" class="sim-code hidden min-h-40 max-h-80 p-4 mono text-[10px] leading-6 text-slate-400"></pre>
             </div>
           </div>
         </div>
@@ -296,7 +297,7 @@
       let outputPayload = null;
       let outputFile = "";
       let outputFileName = "";
-      let outputMode = "payload";
+      let outputMode = "summary";
       let lastRunAt = null;
 
       function currentScenario() { return scenarios[selected]; }
@@ -379,11 +380,12 @@
         el("sim-run").innerHTML = '<span aria-hidden="true">▶</span> Run Pipeline';
         el("sim-copy").disabled = true;
         el("sim-download").disabled = true;
-        el("sim-output-filename").textContent = "structured_payload.json";
-        el("sim-output-state").textContent = "NOT GENERATED";
+        el("sim-output-filename").textContent = "Result summary";
+        el("sim-output-state").textContent = "RUN THE PIPELINE";
         el("sim-output-state").className = "mono text-[8px] text-slate-600";
-        el("sim-output-code").textContent = '{\n  "message": "Run the pipeline to generate a structured result.",\n  "execution": "browser-local",\n  "external_calls": false\n}';
-        setOutputMode("payload");
+        el("sim-output-summary").innerHTML = '<div class="text-sm font-semibold text-slate-200">Your results will appear here.</div><p class="mt-2 text-xs leading-6 text-slate-400">Choose a scenario and select <strong class="font-semibold text-slate-200">Run Pipeline</strong>. We’ll explain whether the invoice passed its checks or needs review.</p>';
+        el("sim-output-code").textContent = "";
+        setOutputMode("summary");
       }
       function buildChecks(scenario) {
         const sum = lineTotal(scenario);
@@ -490,28 +492,102 @@
           resolution_required: "Review the invoice arithmetic and obtain an amended invoice or approved PO change before release."
         }, null, 2) };
       }
+      function makeSummaryText() {
+        const scenario = currentScenario();
+        const sum = lineTotal(scenario);
+        const passed = outputPayload && outputPayload.validation.status === "verified";
+        if (!completed || !outputPayload) {
+          return "Your results will appear here.\nChoose a scenario and select Run Pipeline to see whether the invoice passed its checks or needs review.";
+        }
+        if (passed) {
+          return [
+            "RESULT: INVOICE CHECKS PASSED",
+            "",
+            "The invoice total matches all four line items and the approved purchase order. The sample passed validation and is ready for the simulated handoff.",
+            "",
+            "Invoice: " + scenario.invoiceId,
+            "Supplier: " + scenario.vendor,
+            "Invoice total: " + money(scenario.invoiceTotal),
+            "Calculated line-item total: " + money(sum),
+            "Approved purchase order: " + money(scenario.poTotal),
+            "Extraction confidence: " + scenario.confidence.toFixed(1) + "%",
+            "Checks passed: " + outputPayload.validation.checks.filter(function (check) { return check.status === "passed"; }).length + " of " + outputPayload.validation.checks.length,
+            "Delivery: Ready for ERP / CRM (simulated)",
+            "File created: audit_log.jsonl"
+          ].join("\n");
+        }
+        return [
+          "RESULT: INVOICE NEEDS REVIEW",
+          "",
+          "This invoice was stopped before it could be sent to the ERP or CRM. The amounts do not agree, so a team member should review the invoice before it is processed.",
+          "",
+          "Invoice: " + scenario.invoiceId,
+          "Supplier: " + scenario.vendor,
+          "Invoice total: " + money(scenario.invoiceTotal),
+          "Calculated line-item total: " + money(sum),
+          "Difference: " + money(scenario.invoiceTotal - sum),
+          "Approved purchase order: " + money(scenario.poTotal),
+          "Amount above purchase order: " + money(scenario.invoiceTotal - scenario.poTotal),
+          "Checks passed: " + outputPayload.validation.checks.filter(function (check) { return check.status === "passed"; }).length + " of " + outputPayload.validation.checks.length,
+          "Delivery: Blocked. No ERP or CRM update was made.",
+          "File created: " + outputFileName
+        ].join("\n");
+      }
+      function makeSummaryMarkup() {
+        const scenario = currentScenario();
+        const passed = outputPayload && outputPayload.validation.status === "verified";
+        const sum = lineTotal(scenario);
+        if (!completed || !outputPayload) {
+          return '<div class="text-sm font-semibold text-slate-200">Your results will appear here.</div><p class="mt-2 text-xs leading-6 text-slate-400">Choose a scenario and select <strong class="font-semibold text-slate-200">Run Pipeline</strong>. We’ll explain whether the invoice passed its checks or needs review.</p>';
+        }
+        if (passed) {
+          return '<div class="rounded-lg border border-mint/25 bg-mint/[.06] p-4"><div class="mono text-[9px] tracking-widest text-mint">SUCCESSFUL RESULT</div><div class="mt-2 text-base font-bold text-emerald-200">Invoice checks passed</div><p class="mt-2 text-xs leading-6 text-slate-300">The invoice total matches its line items and approved purchase order. It is ready for the next business-system step in this simulation.</p></div>' +
+            '<div class="mt-3 grid grid-cols-2 gap-2">' +
+            '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Invoice total</div><div class="mono mt-1 text-xs text-slate-100">' + money(scenario.invoiceTotal) + '</div></div>' +
+            '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Line items add up to</div><div class="mono mt-1 text-xs text-slate-100">' + money(sum) + '</div></div>' +
+            '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Approved PO amount</div><div class="mono mt-1 text-xs text-slate-100">' + money(scenario.poTotal) + '</div></div>' +
+            '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Data-reading confidence</div><div class="mono mt-1 text-xs text-slate-100">' + scenario.confidence.toFixed(1) + '%</div></div></div>' +
+            '<div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px]"><span class="text-slate-400">Validation checks</span><span class="font-semibold text-emerald-200">5 of 5 passed</span></div>' +
+            '<div class="mt-2 rounded-lg border border-white/10 bg-white/[.025] px-3 py-3"><div class="text-[10px] text-slate-400">File created</div><div class="mono mt-1 text-[10px] text-cyan">audit_log.jsonl</div><div class="mt-1 text-[10px] text-slate-500">A record of this successful check.</div></div>';
+        }
+        const difference = scenario.invoiceTotal - sum;
+        const poDifference = scenario.invoiceTotal - scenario.poTotal;
+        return '<div class="rounded-lg border border-rose-400/25 bg-rose-400/[.06] p-4"><div class="mono text-[9px] tracking-widest text-rose-200">REVIEW REQUIRED</div><div class="mt-2 text-base font-bold text-rose-100">Invoice held for review</div><p class="mt-2 text-xs leading-6 text-slate-300">The amounts on this invoice do not match. The system has stopped it before any ERP or CRM update could be made.</p></div>' +
+          '<div class="mt-3 grid grid-cols-2 gap-2">' +
+          '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Invoice says</div><div class="mono mt-1 text-xs text-slate-100">' + money(scenario.invoiceTotal) + '</div></div>' +
+          '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Line items add up to</div><div class="mono mt-1 text-xs text-slate-100">' + money(sum) + '</div></div>' +
+          '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Difference to investigate</div><div class="mono mt-1 text-xs text-rose-200">' + money(difference) + '</div></div>' +
+          '<div class="rounded-lg bg-white/[.035] p-3"><div class="text-[9px] text-slate-500">Approved PO amount</div><div class="mono mt-1 text-xs text-slate-100">' + money(scenario.poTotal) + '</div></div></div>' +
+          '<div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px]"><span class="text-slate-400">Validation checks</span><span class="font-semibold text-rose-200">3 of 5 passed · 2 need attention</span></div>' +
+          '<div class="mt-3 rounded-lg border border-white/10 bg-white/[.025] px-3 py-3"><div class="text-[10px] text-slate-400">What happens next</div><p class="mt-1 text-[10px] leading-5 text-slate-300">A reviewer checks the invoice and purchase order. The file below records why the invoice was held. The ERP and CRM remain unchanged.</p><div class="mono mt-2 break-all text-[10px] text-cyan">' + outputFileName + '</div></div>';
+      }
       function setOutputMode(mode) {
         outputMode = mode;
+        el("sim-output-summary-tab").setAttribute("aria-selected", mode === "summary" ? "true" : "false");
         el("sim-output-payload-tab").setAttribute("aria-selected", mode === "payload" ? "true" : "false");
         el("sim-output-file-tab").setAttribute("aria-selected", mode === "file" ? "true" : "false");
+        const showSummary = mode === "summary";
+        el("sim-output-summary").classList.toggle("hidden", !showSummary);
+        el("sim-output-code").classList.toggle("hidden", showSummary);
         if (!completed) {
-          el("sim-output-filename").textContent = mode === "payload" ? "structured_payload.json" : (selected === "valid" ? "audit_log.jsonl" : "INV-2026-043.exception.json");
-          el("sim-output-state").textContent = "NOT GENERATED";
+          el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Technical data (JSON)" : (selected === "valid" ? "audit_log.jsonl" : "INV-2026-043.exception.json");
+          el("sim-output-state").textContent = "RUN THE PIPELINE";
           el("sim-output-state").className = "mono text-[8px] text-slate-600";
+          el("sim-output-summary").innerHTML = makeSummaryMarkup();
           el("sim-output-code").textContent = mode === "payload"
-            ? '{\n  "message": "Run the pipeline to generate a structured result.",\n  "execution": "browser-local",\n  "external_calls": false\n}'
-            : "The output file will be written to this preview after validation completes.";
+            ? '{\n  "message": "Run the pipeline to generate the technical data.",\n  "execution": "browser-local",\n  "external_calls": false\n}'
+            : "The generated file will appear here after the pipeline has run.";
           return;
         }
-        const content = mode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
-        el("sim-output-filename").textContent = mode === "payload" ? "structured_payload.json" : outputFileName;
-        el("sim-output-state").textContent = mode === "payload" ? "GENERATED / JSON" : "GENERATED / FILE PREVIEW";
+        el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Technical data (JSON)" : outputFileName;
+        el("sim-output-state").textContent = mode === "summary" ? "RESULT EXPLAINED" : mode === "payload" ? "TECHNICAL VIEW" : "FILE PREVIEW";
         el("sim-output-state").className = "mono text-[8px] text-mint";
-        el("sim-output-code").textContent = content;
+        el("sim-output-summary").innerHTML = makeSummaryMarkup();
+        el("sim-output-code").textContent = mode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
       }
       async function copyOutput() {
         if (!completed) return;
-        const text = outputMode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
+        const text = outputMode === "summary" ? makeSummaryText() : outputMode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
@@ -526,9 +602,9 @@
             field.remove();
           }
           el("sim-copy").textContent = "Copied ✓";
-          window.setTimeout(function () { el("sim-copy").textContent = "Copy output"; }, 1600);
+          window.setTimeout(function () { el("sim-copy").textContent = "Copy result"; }, 1600);
         } catch (error) {
-          el("sim-copy").textContent = "Copy unavailable";
+          el("sim-copy").textContent = "Copy result unavailable";
         }
       }
       function downloadOutput() {
@@ -628,6 +704,7 @@
         renderScenario();
       });
       el("sim-run").addEventListener("click", runPipeline);
+      el("sim-output-summary-tab").addEventListener("click", function () { setOutputMode("summary"); });
       el("sim-output-payload-tab").addEventListener("click", function () { setOutputMode("payload"); });
       el("sim-output-file-tab").addEventListener("click", function () { setOutputMode("file"); });
       el("sim-copy").addEventListener("click", copyOutput);
