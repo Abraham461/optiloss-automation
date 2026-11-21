@@ -5,7 +5,637 @@
 <main id="home"><section class="mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-2 lg:py-32"><div><div class="mb-6 inline-flex rounded-full border border-mint/30 bg-mint/10 px-3 py-2 text-xs text-emerald-200">B2B DOCUMENT & API AUTOMATION PARTNER</div><h1 class="text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl">Eliminate manual PDF data entry and <span class="gradient">silent API failures.</span></h1><p class="mt-7 max-w-xl text-lg leading-8 text-slate-400">OptiLoss Automation builds layout-aware document ingestion pipelines and automated API reliability guardrails for logistics, insurance, and fintech operations teams.</p><div class="mt-9 flex flex-wrap gap-3"><a href="#contact" class="rounded-lg bg-mint px-6 py-4 text-sm font-bold text-ink">Book a 15-minute workflow audit ↗</a><a href="#demo" class="rounded-lg border border-line px-6 py-4 text-sm font-semibold">Explore the demo ↓</a></div><div class="mt-9 flex flex-wrap gap-6 border-t border-white/10 pt-6 text-xs text-slate-500"><span>✓ Deterministic workflows</span><span>✓ Auditable outputs</span><span>✓ Built for operations</span></div></div>
 <div class="rounded-2xl border border-line bg-panel/90 p-5 shadow-2xl"><div class="flex justify-between border-b border-white/10 pb-4"><span class="mono text-xs text-slate-400">optiloss / pipeline.run</span><span class="mono text-[10px] text-mint">● SYSTEM PREVIEW</span></div><div class="mt-5 rounded-xl border border-line bg-ink p-4"><div class="mono text-xs text-cyan">INPUT / DOCUMENT RECEIVED</div><div class="mt-2 font-semibold">inbound_invoice_042.pdf</div><div class="mt-1 text-xs text-slate-500">PDF · 2.4 MB · 4 pages</div></div><div class="my-3 ml-8 h-6 border-l border-dashed border-mint/50"></div><div class="rounded-xl border border-mint/30 bg-mint/5 p-4"><div class="mono text-xs text-mint">01 / EXTRACT + VALIDATE</div><div class="mt-4 grid grid-cols-2 gap-3"><div class="rounded-lg bg-ink p-3"><div class="mono text-[9px] text-slate-500">INVOICE_NO</div><div class="mt-1 text-sm">INV-2026-042</div></div><div class="rounded-lg bg-ink p-3"><div class="mono text-[9px] text-slate-500">TOTAL</div><div class="mt-1 text-sm">$18,420.00</div></div></div><div class="mt-3 text-xs text-emerald-200">✓ Schema checks passed · confidence scored</div></div><div class="my-3 ml-8 h-6 border-l border-dashed border-cyan/50"></div><div class="rounded-xl border border-cyan/30 bg-cyan/5 p-4"><div class="mono text-xs text-cyan">02 / DELIVER + TRACE</div><div class="mt-2 text-sm">Validated payload → ERP / API</div><div class="mt-1 text-xs text-slate-500">Retry policy · audit log · alerting</div></div></div></section>
 <section id="capabilities" class="border-y border-white/5 bg-white/[.02] py-24"><div class="mx-auto max-w-7xl px-5"><div class="mono text-xs tracking-widest text-mint">WHERE WE HELP</div><h2 class="mt-4 max-w-2xl text-3xl font-bold sm:text-4xl">Reliable automation for the work that slows operations down.</h2><p class="mt-5 max-w-2xl leading-7 text-slate-400">Replace fragile manual handoffs with controlled, observable workflows that fit the systems your team already uses.</p><div class="mt-12 grid gap-5 md:grid-cols-3"><article class="rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-sm text-cyan">01 / DOCUMENTS</div><h3 class="mt-5 text-xl font-semibold">Layout-aware document ingestion</h3><p class="mt-4 text-sm leading-7 text-slate-400">Extract structured data from invoices, forms, and operational PDFs. Apply configurable validation, exception handling, and human review where confidence is low.</p></article><article class="rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-sm text-cyan">02 / API RELIABILITY</div><h3 class="mt-5 text-xl font-semibold">API regression guardrails</h3><p class="mt-4 text-sm leading-7 text-slate-400">Automate endpoint checks, response assertions, schema validation, and regression monitoring to catch integration issues before they disrupt business processes.</p></article><article class="rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-sm text-cyan">03 / INTEGRATION</div><h3 class="mt-5 text-xl font-semibold">ERP and CRM synchronization</h3><p class="mt-4 text-sm leading-7 text-slate-400">Connect operational systems with controlled data mapping, retries, exception queues, and traceable execution histories.</p></article></div></div></section>
-<section id="demo" class="py-24"><div class="mx-auto max-w-5xl px-5 text-center"><div class="mono text-xs tracking-widest text-mint">SEE THE WORKFLOW</div><h2 class="mt-4 text-3xl font-bold sm:text-4xl">From unstructured input to dependable output.</h2><p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400">A practical walkthrough can use a sample PDF, show extracted fields and validation results, then demonstrate how clean data reaches an API or business system.</p><div class="mt-10 grid gap-3 rounded-2xl border border-line bg-panel/70 p-6 text-left sm:grid-cols-3"><div class="rounded-xl bg-ink p-5"><div class="mono text-xs text-cyan">01 INPUT</div><div class="mt-3 font-semibold">PDF / CSV / Image</div><p class="mt-2 text-xs leading-6 text-slate-500">Receive business documents and source files.</p></div><div class="rounded-xl bg-ink p-5"><div class="mono text-xs text-mint">02 PROCESS</div><div class="mt-3 font-semibold">Extract + Validate</div><p class="mt-2 text-xs leading-6 text-slate-500">Normalize, check rules, flag exceptions.</p></div><div class="rounded-xl bg-ink p-5"><div class="mono text-xs text-cyan">03 OUTPUT</div><div class="mt-3 font-semibold">API / ERP / CRM</div><p class="mt-2 text-xs leading-6 text-slate-500">Deliver structured data with an audit trail.</p></div></div><p class="mt-4 text-xs text-slate-600">Demo environment and sample data can be provided during a workflow discussion.</p></div></section>
+<section id="demo" class="py-24">
+  <style>
+    #demo .sim-shell{background:linear-gradient(145deg,rgba(12,26,42,.98),rgba(7,17,31,.98));box-shadow:0 28px 90px rgba(0,0,0,.28)}
+    #demo .sim-tab{border:1px solid #294155;background:#0a1726;color:#94a3b8;transition:all .2s ease}
+    #demo .sim-tab[aria-selected="true"]{border-color:rgba(32,214,160,.65);background:rgba(32,214,160,.10);color:#a7f3d0;box-shadow:inset 0 0 0 1px rgba(32,214,160,.08)}
+    #demo .sim-card{border:1px solid #1d3347;background:rgba(7,17,31,.78)}
+    #demo .sim-step{border:1px solid #24394d;background:rgba(7,17,31,.55);transition:border-color .25s ease,background .25s ease,transform .25s ease}
+    #demo .sim-step.is-active{border-color:rgba(91,216,245,.65);background:rgba(91,216,245,.055);transform:translateY(-1px)}
+    #demo .sim-step.is-done{border-color:rgba(32,214,160,.48)}
+    #demo .sim-step.is-failed{border-color:rgba(251,113,133,.58);background:rgba(127,29,29,.12)}
+    #demo .step-dot{display:grid;place-items:center;width:2rem;height:2rem;border:1px solid #35516a;border-radius:999px;color:#94a3b8;font:500 11px 'JetBrains Mono',monospace;flex:none}
+    #demo .is-active .step-dot{border-color:#5bd8f5;background:rgba(91,216,245,.12);color:#5bd8f5}
+    #demo .is-done .step-dot{border-color:#20d6a0;background:rgba(32,214,160,.12);color:#6ee7b7}
+    #demo .is-failed .step-dot{border-color:#fb7185;background:rgba(251,113,133,.12);color:#fda4af}
+    #demo .sim-code{white-space:pre;overflow:auto;scrollbar-width:thin;scrollbar-color:#35516a transparent}
+    #demo .sim-code::-webkit-scrollbar{height:7px;width:7px}
+    #demo .sim-code::-webkit-scrollbar-thumb{background:#35516a;border-radius:99px}
+    #demo .sim-row{border-bottom:1px solid rgba(148,163,184,.10)}
+    #demo .sim-pill{display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;padding:.28rem .55rem;font:500 9px 'JetBrains Mono',monospace;letter-spacing:.035em}
+    #demo .sim-pill.pass{background:rgba(32,214,160,.10);color:#6ee7b7;border:1px solid rgba(32,214,160,.22)}
+    #demo .sim-pill.fail{background:rgba(251,113,133,.10);color:#fda4af;border:1px solid rgba(251,113,133,.25)}
+    #demo .sim-pill.neutral{background:rgba(148,163,184,.08);color:#94a3b8;border:1px solid rgba(148,163,184,.16)}
+    #demo .sim-action{transition:transform .18s ease,filter .18s ease}
+    #demo .sim-action:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}
+    #demo .sim-action:disabled{cursor:wait;opacity:.65}
+    #demo .sim-progress{height:3px;overflow:hidden;background:#1d3347;border-radius:999px}
+    #demo .sim-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#20d6a0,#5bd8f5);transition:width .45s ease}
+    #demo .sim-fade{animation:simFade .35s ease both}
+    @keyframes simFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){#demo *,#demo *:before,#demo *:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+
+  <div class="mx-auto max-w-7xl px-5">
+    <div class="mx-auto max-w-3xl text-center">
+      <div class="mono text-xs tracking-widest text-mint">LIVE INTERACTIVE DEMO / NO BACKEND REQUIRED</div>
+      <h2 class="mt-4 text-3xl font-bold sm:text-4xl">Pipeline &amp; Guardrail Simulator</h2>
+      <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400">Run two realistic invoice scenarios through extraction, deterministic validation, and a simulated API delivery gate. Watch a clean invoice move forward and a financial discrepancy get quarantined before it reaches an ERP or CRM.</p>
+    </div>
+
+    <div class="sim-shell mt-10 overflow-hidden rounded-2xl border border-line">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-5 py-4 sm:px-7">
+        <div class="flex items-center gap-3">
+          <div class="grid h-9 w-9 place-items-center rounded-xl border border-mint/25 bg-mint/10 text-lg text-mint">◈</div>
+          <div>
+            <div class="mono text-xs text-slate-200">optiloss / pipeline.simulate</div>
+            <div class="mt-1 text-[10px] text-slate-500">DOCUMENT CONTROL PLANE</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="sim-pill pass">● LOCAL EXECUTION</span>
+          <span class="sim-pill neutral">NO EXTERNAL API CALLS</span>
+        </div>
+      </div>
+
+      <div class="border-b border-white/10 px-5 py-5 sm:px-7">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <div class="mono text-[10px] tracking-widest text-slate-500">SELECT AN OPERATIONAL SCENARIO</div>
+          <div id="sim-scenario-count" class="mono text-[10px] text-slate-500">SCENARIO 01 / 02</div>
+        </div>
+        <div class="grid gap-3 md:grid-cols-2" role="tablist" aria-label="Invoice scenarios">
+          <button id="sim-tab-valid" class="sim-tab rounded-xl p-4 text-left" type="button" role="tab" aria-selected="true" aria-controls="sim-workspace" data-scenario="valid">
+            <span class="flex items-center justify-between gap-3">
+              <span class="mono text-[10px] tracking-wider">SCENARIO A</span>
+              <span class="sim-pill pass">EXPECTED PASS</span>
+            </span>
+            <span class="mt-2 block text-sm font-semibold text-slate-100">INV-2026-042</span>
+            <span class="mt-1 block text-xs text-slate-400">Valid multi-line logistics invoice · $18,420.00</span>
+          </button>
+          <button id="sim-tab-exception" class="sim-tab rounded-xl p-4 text-left" type="button" role="tab" aria-selected="false" aria-controls="sim-workspace" data-scenario="exception">
+            <span class="flex items-center justify-between gap-3">
+              <span class="mono text-[10px] tracking-wider">SCENARIO B</span>
+              <span class="sim-pill fail">EXPECTED EXCEPTION</span>
+            </span>
+            <span class="mt-2 block text-sm font-semibold text-slate-100">INV-2026-043</span>
+            <span class="mt-1 block text-xs text-slate-400">Math &amp; PO guardrail catch · $19,020.00 declared</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="sim-workspace" class="grid gap-5 p-5 sm:p-7 lg:grid-cols-12">
+        <aside class="lg:col-span-5">
+          <div class="sim-card h-full overflow-hidden rounded-xl">
+            <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              <div class="mono text-[10px] tracking-widest text-cyan">SOURCE DOCUMENT / PDF PARSE</div>
+              <span class="sim-pill neutral">SAMPLE DATA</span>
+            </div>
+            <div class="p-4">
+              <div class="rounded-lg border border-white/10 bg-white/[.025] p-4">
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="mono text-[9px] tracking-wider text-slate-500">SUPPLIER</div>
+                    <div id="sim-vendor" class="mt-2 text-sm font-semibold leading-5 text-slate-100">Northstar Freight &amp; Port Services LLC</div>
+                    <div id="sim-vendor-id" class="mt-1 mono text-[10px] text-slate-500">VND-2048</div>
+                  </div>
+                  <div class="rounded-lg border border-cyan/20 bg-cyan/5 px-2 py-1.5 text-right">
+                    <div class="mono text-[8px] text-slate-500">DOCUMENT</div>
+                    <div class="mono mt-1 text-[10px] text-cyan">PDF / 3 PAGES</div>
+                  </div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 gap-x-3 gap-y-3">
+                  <div><div class="mono text-[8px] text-slate-500">INVOICE NUMBER</div><div id="sim-invoice-id" class="mono mt-1 text-[11px] text-slate-200">INV-2026-042</div></div>
+                  <div><div class="mono text-[8px] text-slate-500">INVOICE DATE</div><div id="sim-invoice-date" class="mt-1 text-[11px] text-slate-300">18 Nov 2026</div></div>
+                  <div><div class="mono text-[8px] text-slate-500">PURCHASE ORDER</div><div id="sim-po-number" class="mono mt-1 text-[11px] text-slate-200">PO-2026-1188</div></div>
+                  <div><div class="mono text-[8px] text-slate-500">SHIPMENT REF</div><div id="sim-shipment" class="mono mt-1 text-[11px] text-slate-200">MSI-LAX-88421</div></div>
+                  <div class="col-span-2"><div class="mono text-[8px] text-slate-500">BILL TO</div><div id="sim-bill-to" class="mt-1 text-[11px] text-slate-300">Meridian Specialty Insurance Group</div></div>
+                </div>
+              </div>
+
+              <div class="mt-5 flex items-center justify-between">
+                <div class="mono text-[10px] tracking-widest text-slate-500">EXTRACTED LINE ITEMS</div>
+                <div id="sim-line-count" class="mono text-[9px] text-slate-500">04 RECORDS</div>
+              </div>
+              <div class="mt-2 overflow-hidden rounded-lg border border-white/10">
+                <div class="grid grid-cols-[1fr_auto] bg-white/[.035] px-3 py-2 mono text-[8px] tracking-wider text-slate-500">
+                  <span>CHARGE CODE</span><span>AMOUNT (USD)</span>
+                </div>
+                <div id="sim-line-items"></div>
+                <div class="flex items-center justify-between border-t border-white/10 bg-white/[.025] px-3 py-3">
+                  <span class="text-[10px] text-slate-400">Calculated line total</span>
+                  <strong id="sim-line-total" class="mono text-xs text-slate-100">$18,420.00</strong>
+                </div>
+              </div>
+
+              <div class="mt-3 grid grid-cols-2 gap-3">
+                <div class="rounded-lg border border-white/10 bg-white/[.025] p-3">
+                  <div class="mono text-[8px] text-slate-500">INVOICE TOTAL</div>
+                  <div id="sim-invoice-total" class="mono mt-2 text-base font-semibold text-slate-100">$18,420.00</div>
+                </div>
+                <div class="rounded-lg border border-white/10 bg-white/[.025] p-3">
+                  <div class="mono text-[8px] text-slate-500">APPROVED PO</div>
+                  <div id="sim-po-total" class="mono mt-2 text-base font-semibold text-slate-100">$18,420.00</div>
+                </div>
+              </div>
+              <div id="sim-source-warning" class="mt-3 hidden rounded-lg border border-rose-400/25 bg-rose-400/[.06] px-3 py-2 text-[11px] leading-5 text-rose-200"></div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="lg:col-span-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div class="mono text-[10px] tracking-widest text-mint">PIPELINE EXECUTION</div>
+              <div class="mt-1 text-sm font-semibold text-slate-100">Three-stage processing sequence</div>
+            </div>
+            <button id="sim-run" type="button" class="sim-action inline-flex items-center gap-2 rounded-lg bg-mint px-5 py-3 text-xs font-extrabold text-ink shadow-lg shadow-mint/10">
+              <span aria-hidden="true">▶</span> Run Pipeline
+            </button>
+          </div>
+          <div class="mt-4 flex items-center justify-between gap-3">
+            <div id="sim-run-status" class="mono text-[9px] tracking-wider text-slate-500" role="status" aria-live="polite">READY / AWAITING EXECUTION</div>
+            <div id="sim-progress-label" class="mono text-[9px] text-slate-500">0 / 3 STEPS</div>
+          </div>
+          <div class="sim-progress mt-2"><span id="sim-progress-bar"></span></div>
+
+          <div class="mt-4 space-y-3">
+            <article id="sim-step-1" class="sim-step rounded-xl p-4">
+              <div class="flex items-center gap-3">
+                <span class="step-dot">01</span>
+                <div class="min-w-0 flex-1">
+                  <div class="mono text-[10px] tracking-widest text-cyan">01 EXTRACT</div>
+                  <div class="mt-1 text-xs text-slate-400">Parse document fields and score extraction confidence</div>
+                </div>
+                <span id="sim-step-1-status" class="sim-pill neutral">WAITING</span>
+              </div>
+              <div id="sim-step-1-body" class="mt-4 hidden border-t border-white/10 pt-4"></div>
+            </article>
+
+            <article id="sim-step-2" class="sim-step rounded-xl p-4">
+              <div class="flex items-center gap-3">
+                <span class="step-dot">02</span>
+                <div class="min-w-0 flex-1">
+                  <div class="mono text-[10px] tracking-widest text-mint">02 VALIDATE</div>
+                  <div class="mt-1 text-xs text-slate-400">Reconcile line items, invoice total, PO, and required fields</div>
+                </div>
+                <span id="sim-step-2-status" class="sim-pill neutral">WAITING</span>
+              </div>
+              <div id="sim-step-2-body" class="mt-4 hidden border-t border-white/10 pt-4"></div>
+            </article>
+
+            <article id="sim-step-3" class="sim-step rounded-xl p-4">
+              <div class="flex items-center gap-3">
+                <span class="step-dot">03</span>
+                <div class="min-w-0 flex-1">
+                  <div class="mono text-[10px] tracking-widest text-cyan">03 OUTPUT / API CHECK</div>
+                  <div class="mt-1 text-xs text-slate-400">Assert delivery schema or block sync and write an exception</div>
+                </div>
+                <span id="sim-step-3-status" class="sim-pill neutral">WAITING</span>
+              </div>
+              <div id="sim-step-3-body" class="mt-4 hidden border-t border-white/10 pt-4"></div>
+            </article>
+          </div>
+
+          <div class="mt-4 rounded-xl border border-white/10 bg-white/[.025] p-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div class="mono text-[10px] tracking-widest text-slate-400">OUTPUT INSPECTOR</div>
+                <div class="mt-1 text-[11px] text-slate-500">Generated locally from the selected scenario</div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button id="sim-copy" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Copy output</button>
+                <button id="sim-download" type="button" class="sim-action rounded-md border border-line px-3 py-2 mono text-[9px] text-slate-300" disabled>Download file ↧</button>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Output inspector view">
+              <button id="sim-output-payload-tab" type="button" role="tab" aria-selected="true" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Structured JSON Payload</button>
+              <button id="sim-output-file-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Output File <span class="mono text-[9px]">(.jsonl / .json)</span></button>
+            </div>
+            <div id="sim-output-content" class="mt-3 overflow-hidden rounded-lg border border-white/10 bg-[#050d17]" role="tabpanel" aria-live="polite">
+              <div class="flex items-center justify-between border-b border-white/10 px-3 py-2">
+                <span id="sim-output-filename" class="mono text-[9px] text-cyan">structured_payload.json</span>
+                <span id="sim-output-state" class="mono text-[8px] text-slate-600">NOT GENERATED</span>
+              </div>
+              <pre id="sim-output-code" class="sim-code min-h-40 max-h-80 p-4 mono text-[10px] leading-6 text-slate-400">{
+  "message": "Run the pipeline to generate a structured result.",
+  "execution": "browser-local",
+  "external_calls": false
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 border-t border-white/10 bg-white/[.02] px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+        <p class="max-w-3xl text-[11px] leading-5 text-slate-500">This is a deterministic browser simulation using synthetic sample data. The “200 OK” receipt represents a local schema assertion only; no invoice is uploaded and no ERP, CRM, webhook, paid API, or external backend is contacted.</p>
+        <a href="#contact" class="shrink-0 text-xs font-semibold text-mint transition hover:text-cyan">Want this tested on one of your workflows? Book a 15-minute audit ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+      const scenarios = {
+        valid: {
+          key: "valid",
+          label: "SCENARIO A",
+          invoiceId: "INV-2026-042",
+          vendor: "Northstar Freight & Port Services LLC",
+          vendorId: "VND-2048",
+          invoiceDate: "2026-11-18",
+          dueDate: "2026-12-18",
+          poNumber: "PO-2026-1188",
+          shipmentRef: "MSI-LAX-88421",
+          billTo: "Meridian Specialty Insurance Group",
+          invoiceTotal: 18420,
+          poTotal: 18420,
+          confidence: 98.7,
+          lines: [
+            { code: "linehaul_freight", description: "Linehaul freight · Los Angeles to Dallas", quantity: 1, unit: "shipment", rate: 12600, amount: 12600 },
+            { code: "drayage", description: "Port drayage · 2 container moves", quantity: 2, unit: "move", rate: 850, amount: 1700 },
+            { code: "fuel_surcharge", description: "Fuel surcharge · contract rate", quantity: 1, unit: "charge", rate: 1512, amount: 1512 },
+            { code: "customs_clearance", description: "Customs clearance · entry processing", quantity: 1, unit: "entry", rate: 2608, amount: 2608 }
+          ]
+        },
+        exception: {
+          key: "exception",
+          label: "SCENARIO B",
+          invoiceId: "INV-2026-043",
+          vendor: "Harborline Logistics & Customs Ltd.",
+          vendorId: "VND-3196",
+          invoiceDate: "2026-11-19",
+          dueDate: "2026-12-19",
+          poNumber: "PO-2026-1194",
+          shipmentRef: "AGI-SAV-91736",
+          billTo: "Asteron General Insurance",
+          invoiceTotal: 19020,
+          poTotal: 18420,
+          confidence: 98.4,
+          lines: [
+            { code: "linehaul_freight", description: "Linehaul freight · Savannah to Atlanta", quantity: 1, unit: "shipment", rate: 11600, amount: 11600 },
+            { code: "drayage", description: "Port drayage · 2 container moves", quantity: 2, unit: "move", rate: 850, amount: 1700 },
+            { code: "fuel_surcharge", description: "Fuel surcharge · contract rate", quantity: 1, unit: "charge", rate: 1512, amount: 1512 },
+            { code: "customs_clearance", description: "Customs clearance · entry processing", quantity: 1, unit: "entry", rate: 3608, amount: 3608 }
+          ]
+        }
+      };
+
+      const el = function (id) { return document.getElementById(id); };
+      const money = function (amount) {
+        return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(amount);
+      };
+      const dateLabel = function (iso) {
+        return new Date(iso + "T12:00:00").toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
+      };
+      const delay = function (ms) { return new Promise(function (resolve) { window.setTimeout(resolve, ms); }); };
+      let selected = "valid";
+      let running = false;
+      let completed = false;
+      let outputPayload = null;
+      let outputFile = "";
+      let outputFileName = "";
+      let outputMode = "payload";
+      let lastRunAt = null;
+
+      function currentScenario() { return scenarios[selected]; }
+      function lineTotal(scenario) {
+        return scenario.lines.reduce(function (sum, line) { return sum + line.amount; }, 0);
+      }
+      function setPill(id, label, state) {
+        const node = el(id);
+        node.className = "sim-pill " + state;
+        node.textContent = label;
+      }
+      function setStepState(number, state, label) {
+        const card = el("sim-step-" + number);
+        card.classList.remove("is-active", "is-done", "is-failed");
+        if (state) card.classList.add(state);
+        setPill("sim-step-" + number + "-status", label, state === "is-done" ? "pass" : state === "is-failed" ? "fail" : "neutral");
+      }
+      function showStepBody(number, html) {
+        const body = el("sim-step-" + number + "-body");
+        body.innerHTML = html;
+        body.classList.remove("hidden");
+        body.classList.add("sim-fade");
+      }
+      function clearStepBodies() {
+        [1, 2, 3].forEach(function (number) {
+          const body = el("sim-step-" + number + "-body");
+          body.innerHTML = "";
+          body.classList.add("hidden");
+          body.classList.remove("sim-fade");
+          setStepState(number, "", "WAITING");
+        });
+      }
+      function setProgress(count) {
+        el("sim-progress-bar").style.width = (count / 3 * 100) + "%";
+        el("sim-progress-label").textContent = count + " / 3 STEPS";
+      }
+      function renderScenario() {
+        const scenario = currentScenario();
+        const sum = lineTotal(scenario);
+        el("sim-scenario-count").textContent = selected === "valid" ? "SCENARIO 01 / 02" : "SCENARIO 02 / 02";
+        el("sim-vendor").textContent = scenario.vendor;
+        el("sim-vendor-id").textContent = scenario.vendorId;
+        el("sim-invoice-id").textContent = scenario.invoiceId;
+        el("sim-invoice-date").textContent = dateLabel(scenario.invoiceDate);
+        el("sim-po-number").textContent = scenario.poNumber;
+        el("sim-shipment").textContent = scenario.shipmentRef;
+        el("sim-bill-to").textContent = scenario.billTo;
+        el("sim-line-count").textContent = String(scenario.lines.length).padStart(2, "0") + " RECORDS";
+        el("sim-line-items").innerHTML = scenario.lines.map(function (line) {
+          return '<div class="sim-row grid grid-cols-[1fr_auto] gap-3 px-3 py-3"><div class="min-w-0"><div class="mono break-all text-[9px] text-slate-300">' + line.code + '</div><div class="mt-1 text-[9px] leading-4 text-slate-500">' + line.description + ' · ' + line.quantity + ' × ' + money(line.rate) + '</div></div><div class="mono whitespace-nowrap text-[10px] text-slate-200">' + money(line.amount) + '</div></div>';
+        }).join("");
+        el("sim-line-total").textContent = money(sum);
+        el("sim-invoice-total").textContent = money(scenario.invoiceTotal);
+        el("sim-po-total").textContent = money(scenario.poTotal);
+        const warning = el("sim-source-warning");
+        if (sum !== scenario.invoiceTotal || scenario.invoiceTotal !== scenario.poTotal) {
+          const mathDelta = scenario.invoiceTotal - sum;
+          const poDelta = scenario.invoiceTotal - scenario.poTotal;
+          warning.textContent = "Guardrail preview: line items are " + money(Math.abs(mathDelta)) + (mathDelta > 0 ? " below" : " above") + " the declared total; invoice is " + money(Math.abs(poDelta)) + " over the approved PO.";
+          warning.classList.remove("hidden");
+        } else {
+          warning.textContent = "";
+          warning.classList.add("hidden");
+        }
+        el("sim-tab-valid").setAttribute("aria-selected", selected === "valid" ? "true" : "false");
+        el("sim-tab-exception").setAttribute("aria-selected", selected === "exception" ? "true" : "false");
+        resetRun();
+      }
+      function resetRun() {
+        completed = false;
+        outputPayload = null;
+        outputFile = "";
+        outputFileName = "";
+        lastRunAt = null;
+        clearStepBodies();
+        setProgress(0);
+        el("sim-run-status").textContent = "READY / AWAITING EXECUTION";
+        el("sim-run-status").className = "mono text-[9px] tracking-wider text-slate-500";
+        el("sim-run").disabled = false;
+        el("sim-run").innerHTML = '<span aria-hidden="true">▶</span> Run Pipeline';
+        el("sim-copy").disabled = true;
+        el("sim-download").disabled = true;
+        el("sim-output-filename").textContent = "structured_payload.json";
+        el("sim-output-state").textContent = "NOT GENERATED";
+        el("sim-output-state").className = "mono text-[8px] text-slate-600";
+        el("sim-output-code").textContent = '{\n  "message": "Run the pipeline to generate a structured result.",\n  "execution": "browser-local",\n  "external_calls": false\n}';
+        setOutputMode("payload");
+      }
+      function buildChecks(scenario) {
+        const sum = lineTotal(scenario);
+        return [
+          { rule: "required_header_fields", detail: "Invoice ID, vendor, date, currency, and PO reference", passed: true },
+          { rule: "line_item_extensions", detail: "Quantity × unit rate matches each line amount", passed: scenario.lines.every(function (line) { return line.quantity * line.rate === line.amount; }) },
+          { rule: "invoice_total_reconciliation", detail: "Line-item sum " + money(sum) + " equals declared total " + money(scenario.invoiceTotal), passed: sum === scenario.invoiceTotal },
+          { rule: "purchase_order_tolerance", detail: "Invoice total " + money(scenario.invoiceTotal) + " compared with approved PO " + money(scenario.poTotal), passed: Math.abs(scenario.invoiceTotal - scenario.poTotal) <= 0.01 },
+          { rule: "duplicate_invoice_check", detail: "No duplicate invoice identifier in this sample run", passed: true }
+        ];
+      }
+      function renderChecks(checks) {
+        return '<div class="space-y-2">' + checks.map(function (check) {
+          const state = check.passed ? "pass" : "fail";
+          const label = check.passed ? "PASS" : "FAIL";
+          return '<div class="flex items-start justify-between gap-3 rounded-lg border border-white/[.07] bg-white/[.02] px-3 py-2"><div class="min-w-0"><div class="mono break-all text-[9px] text-slate-300">' + check.rule + '</div><div class="mt-1 text-[10px] leading-5 text-slate-500">' + check.detail + '</div></div><span class="sim-pill ' + state + '">' + label + '</span></div>';
+        }).join("") + '</div>';
+      }
+      function makePayload(scenario, checks, runAt) {
+        const sum = lineTotal(scenario);
+        const passed = checks.every(function (check) { return check.passed; });
+        const base = {
+          simulator: { name: "OptiLoss Pipeline & Guardrail Simulator", execution_mode: "browser_local", external_calls: false, generated_at: runAt },
+          event_type: passed ? "invoice.pipeline.verified" : "invoice.pipeline.quarantined",
+          document: {
+            invoice_id: scenario.invoiceId,
+            vendor: { name: scenario.vendor, vendor_id: scenario.vendorId },
+            invoice_date: scenario.invoiceDate,
+            due_date: scenario.dueDate,
+            purchase_order: scenario.poNumber,
+            shipment_reference: scenario.shipmentRef,
+            bill_to: scenario.billTo,
+            currency: "USD",
+            line_items: scenario.lines.map(function (line) {
+              return { charge_code: line.code, description: line.description, quantity: line.quantity, unit: line.unit, unit_rate: line.rate, line_amount: line.amount };
+            }),
+            calculated_line_total: sum,
+            declared_invoice_total: scenario.invoiceTotal,
+            approved_po_total: scenario.poTotal
+          },
+          extraction: { status: "completed", confidence: scenario.confidence / 100, confidence_percent: scenario.confidence },
+          validation: {
+            status: passed ? "verified" : "quarantined",
+            checks: checks.map(function (check) { return { rule: check.rule, status: check.passed ? "passed" : "failed", detail: check.detail }; })
+          }
+        };
+        if (passed) {
+          base.delivery = {
+            target: ["ERP", "CRM"],
+            api_webhook_schema_assertion: { status: "200 OK", result: "PASS", transport: "local_simulation_only", receipt_id: "SIM-WEBHOOK-200-" + scenario.invoiceId }
+          };
+          base.audit = { file: "audit_log.jsonl", action: "invoice.verified_and_ready_for_sync", downstream_sync: "permitted_after_simulation" };
+        } else {
+          base.exception = {
+            exception_id: "EXC-" + scenario.invoiceId + "-001",
+            status: "QUARANTINED / EXCEPTION",
+            severity: "high",
+            triggered_rules: checks.filter(function (check) { return !check.passed; }).map(function (check) { return check.rule; }),
+            line_item_total: sum,
+            declared_invoice_total: scenario.invoiceTotal,
+            line_item_variance: scenario.invoiceTotal - sum,
+            approved_po_total: scenario.poTotal,
+            po_variance: scenario.invoiceTotal - scenario.poTotal
+          };
+          base.delivery = { target: ["ERP", "CRM"], status: "blocked", reason: "Validation failed; no downstream synchronization attempted." };
+          base.output_file = scenario.invoiceId + ".exception.json";
+        }
+        return base;
+      }
+      function createFileContents(payload, scenario, runAt) {
+        if (selected === "valid") {
+          const entry = {
+            timestamp: runAt,
+            event: "invoice.verified",
+            invoice_id: scenario.invoiceId,
+            vendor_id: scenario.vendorId,
+            purchase_order: scenario.poNumber,
+            currency: "USD",
+            calculated_line_total: lineTotal(scenario),
+            invoice_total: scenario.invoiceTotal,
+            validation: "VERIFIED",
+            api_schema_assertion: "200 OK (local simulation)",
+            downstream_sync: "permitted_after_simulation"
+          };
+          return { name: "audit_log.jsonl", content: JSON.stringify(entry) };
+        }
+        return { name: scenario.invoiceId + ".exception.json", content: JSON.stringify({
+          exception_id: payload.exception.exception_id,
+          invoice_id: scenario.invoiceId,
+          vendor: scenario.vendor,
+          purchase_order: scenario.poNumber,
+          status: "QUARANTINED / EXCEPTION",
+          detected_at: runAt,
+          currency: "USD",
+          reconciliation: {
+            line_item_total: lineTotal(scenario),
+            declared_invoice_total: scenario.invoiceTotal,
+            difference: scenario.invoiceTotal - lineTotal(scenario),
+            approved_po_total: scenario.poTotal,
+            po_overrun: scenario.invoiceTotal - scenario.poTotal
+          },
+          failed_rules: payload.exception.triggered_rules,
+          downstream_sync: { erp: "BLOCKED", crm: "BLOCKED", webhook: "NOT_SENT" },
+          resolution_required: "Review the invoice arithmetic and obtain an amended invoice or approved PO change before release."
+        }, null, 2) };
+      }
+      function setOutputMode(mode) {
+        outputMode = mode;
+        el("sim-output-payload-tab").setAttribute("aria-selected", mode === "payload" ? "true" : "false");
+        el("sim-output-file-tab").setAttribute("aria-selected", mode === "file" ? "true" : "false");
+        if (!completed) {
+          el("sim-output-filename").textContent = mode === "payload" ? "structured_payload.json" : (selected === "valid" ? "audit_log.jsonl" : "INV-2026-043.exception.json");
+          el("sim-output-state").textContent = "NOT GENERATED";
+          el("sim-output-state").className = "mono text-[8px] text-slate-600";
+          el("sim-output-code").textContent = mode === "payload"
+            ? '{\n  "message": "Run the pipeline to generate a structured result.",\n  "execution": "browser-local",\n  "external_calls": false\n}'
+            : "The output file will be written to this preview after validation completes.";
+          return;
+        }
+        const content = mode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
+        el("sim-output-filename").textContent = mode === "payload" ? "structured_payload.json" : outputFileName;
+        el("sim-output-state").textContent = mode === "payload" ? "GENERATED / JSON" : "GENERATED / FILE PREVIEW";
+        el("sim-output-state").className = "mono text-[8px] text-mint";
+        el("sim-output-code").textContent = content;
+      }
+      async function copyOutput() {
+        if (!completed) return;
+        const text = outputMode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const field = document.createElement("textarea");
+            field.value = text;
+            field.style.position = "fixed";
+            field.style.opacity = "0";
+            document.body.appendChild(field);
+            field.select();
+            document.execCommand("copy");
+            field.remove();
+          }
+          el("sim-copy").textContent = "Copied ✓";
+          window.setTimeout(function () { el("sim-copy").textContent = "Copy output"; }, 1600);
+        } catch (error) {
+          el("sim-copy").textContent = "Copy unavailable";
+        }
+      }
+      function downloadOutput() {
+        if (!completed) return;
+        const blob = new Blob([outputFile], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = outputFileName;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        URL.revokeObjectURL(url);
+      }
+      async function runPipeline() {
+        if (running) return;
+        running = true;
+        const scenario = currentScenario();
+        const sum = lineTotal(scenario);
+        const checks = buildChecks(scenario);
+        const passed = checks.every(function (check) { return check.passed; });
+        const runAt = new Date().toISOString();
+        lastRunAt = runAt;
+        el("sim-run").disabled = true;
+        el("sim-run").textContent = "RUNNING PIPELINE…";
+        el("sim-run-status").textContent = "EXECUTING / EXTRACT";
+        el("sim-run-status").className = "mono text-[9px] tracking-wider text-cyan";
+        clearStepBodies();
+        setProgress(0);
+
+        setStepState(1, "is-active", "RUNNING");
+        await delay(700);
+        showStepBody(1,
+          '<div class="grid grid-cols-2 gap-2 sm:grid-cols-3">' +
+          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">INVOICE ID</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.invoiceId + '</div></div>' +
+          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">CURRENCY</div><div class="mono mt-1 text-[10px] text-slate-200">USD</div></div>' +
+          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">LINE RECORDS</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.lines.length + ' / 4</div></div>' +
+          '</div><div class="mt-3 flex flex-wrap items-center justify-between gap-2"><span class="text-[10px] text-slate-400">Parsed header, PO reference, and four charge codes.</span><span class="mono text-xs font-semibold text-mint">' + scenario.confidence.toFixed(1) + '% CONFIDENCE</span></div>'
+        );
+        setStepState(1, "is-done", "EXTRACTED");
+        setProgress(1);
+
+        el("sim-run-status").textContent = "EXECUTING / VALIDATE";
+        setStepState(2, "is-active", "CHECKING");
+        await delay(850);
+        showStepBody(2, renderChecks(checks) +
+          '<div class="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg ' + (passed ? 'border border-mint/20 bg-mint/[.06]' : 'border border-rose-400/25 bg-rose-400/[.06]') + ' px-3 py-3">' +
+          '<span class="mono text-[9px] tracking-wider ' + (passed ? 'text-emerald-200' : 'text-rose-200') + '">' + (passed ? '[VERIFIED]' : '[QUARANTINED / EXCEPTION]') + '</span>' +
+          '<span class="mono text-[9px] ' + (passed ? 'text-slate-400' : 'text-rose-200') + '">LINE SUM ' + money(sum) + '</span></div>'
+        );
+        setStepState(2, passed ? "is-done" : "is-failed", passed ? "VERIFIED" : "QUARANTINED");
+        setProgress(2);
+
+        el("sim-run-status").textContent = passed ? "EXECUTING / OUTPUT + API ASSERTION" : "GUARDRAIL TRIGGERED / DOWNSTREAM HALTED";
+        setStepState(3, "is-active", "PROCESSING");
+        await delay(850);
+        outputPayload = makePayload(scenario, checks, runAt);
+        const file = createFileContents(outputPayload, scenario, runAt);
+        outputFileName = file.name;
+        outputFile = file.content;
+        if (passed) {
+          showStepBody(3,
+            '<div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-mint/25 bg-mint/[.06] p-3">' +
+            '<div><div class="mono text-[9px] tracking-wider text-mint">SCHEMA ASSERTION RECEIPT</div><div class="mt-1 text-lg font-bold text-emerald-200">200 OK</div><div class="mt-1 text-[10px] text-slate-400">Local webhook contract check · no request sent</div></div>' +
+            '<span class="sim-pill pass">ASSERTION PASSED</span></div>' +
+            '<div class="mt-3 grid gap-2 sm:grid-cols-2"><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">AUDIT OUTPUT</div><div class="mono mt-1 text-[10px] text-slate-200">audit_log.jsonl</div></div><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">DOWNSTREAM GATE</div><div class="mt-1 text-[10px] text-emerald-200">ERP / CRM eligible</div></div></div>'
+          );
+          setStepState(3, "is-done", "200 OK");
+          el("sim-run-status").textContent = "COMPLETE / [VERIFIED]";
+          el("sim-run-status").className = "mono text-[9px] tracking-wider text-mint";
+        } else {
+          showStepBody(3,
+            '<div class="rounded-lg border border-rose-400/25 bg-rose-400/[.06] p-3"><div class="flex flex-wrap items-center justify-between gap-2"><div class="mono text-[9px] tracking-wider text-rose-200">DOWNSTREAM DELIVERY BLOCKED</div><span class="sim-pill fail">NO SYNC</span></div><div class="mt-2 text-[11px] leading-5 text-slate-300">ERP and CRM writes are stopped. An exception payload has been generated for review.</div><div class="mt-3 mono break-all text-[10px] text-rose-200">' + file.name + '</div></div>'
+          );
+          setStepState(3, "is-failed", "BLOCKED");
+          el("sim-run-status").textContent = "HALTED / [QUARANTINED / EXCEPTION]";
+          el("sim-run-status").className = "mono text-[9px] tracking-wider text-rose-300";
+        }
+        setProgress(3);
+        completed = true;
+        el("sim-run").disabled = false;
+        el("sim-run").innerHTML = '<span aria-hidden="true">↻</span> Run Again';
+        el("sim-copy").disabled = false;
+        el("sim-download").disabled = false;
+        setOutputMode(outputMode);
+        running = false;
+      }
+
+      el("sim-tab-valid").addEventListener("click", function () {
+        if (running || selected === "valid") return;
+        selected = "valid";
+        renderScenario();
+      });
+      el("sim-tab-exception").addEventListener("click", function () {
+        if (running || selected === "exception") return;
+        selected = "exception";
+        renderScenario();
+      });
+      el("sim-run").addEventListener("click", runPipeline);
+      el("sim-output-payload-tab").addEventListener("click", function () { setOutputMode("payload"); });
+      el("sim-output-file-tab").addEventListener("click", function () { setOutputMode("file"); });
+      el("sim-copy").addEventListener("click", copyOutput);
+      el("sim-download").addEventListener("click", downloadOutput);
+      renderScenario();
+    })();
+  </script>
+</section>
 <section id="pricing" class="border-y border-white/5 bg-white/[.02] py-24"><div class="mx-auto max-w-7xl px-5"><div class="text-center"><div class="mono text-xs tracking-widest text-mint">ENGAGEMENT MODELS</div><h2 class="mt-4 text-3xl font-bold sm:text-4xl">Start with a workflow. Scale with evidence.</h2><p class="mt-4 text-sm text-slate-400">Indicative pricing. Final scope depends on integrations, data quality, and service levels.</p></div><div class="mt-12 grid items-stretch gap-5 lg:grid-cols-3"><article class="flex flex-col rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-xs text-slate-500">TIER 01 / DISCOVERY</div><h3 class="mt-4 text-xl font-semibold">Workflow bottleneck audit & prototype</h3><div class="mt-6 text-3xl font-bold">$1,500 <span class="text-lg text-slate-500">– $2,500</span></div><div class="mt-2 text-xs text-slate-500">One-time · 1 week</div><p class="my-6 text-sm leading-7 text-slate-400">Workflow review and a focused proof-of-concept using anonymized sample files. Validate feasibility before a production commitment.</p><a href="#contact" class="mt-auto rounded-lg border border-line px-4 py-3 text-center text-sm">Discuss an audit ↗</a></article><article class="relative flex flex-col rounded-2xl border border-mint/50 bg-mint/[.06] p-7"><div class="absolute right-5 top-5 rounded-full bg-mint px-3 py-1 mono text-[9px] font-bold text-ink">MOST POPULAR</div><div class="mono text-xs text-mint">TIER 02 / IMPLEMENTATION</div><h3 class="mt-4 text-xl font-semibold">Production document & API pipeline</h3><div class="mt-6 text-3xl font-bold">$5,000 <span class="text-lg text-slate-400">– $12,000</span></div><div class="mt-2 text-xs text-slate-400">One-time · 3–4 weeks</div><p class="my-6 text-sm leading-7 text-slate-300">Production workflow with extraction, configurable validation, integration, retries, audit trail, and operational handover.</p><a href="#contact" class="mt-auto rounded-lg bg-mint px-4 py-3 text-center text-sm font-bold text-ink">Scope a production build ↗</a></article><article class="flex flex-col rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-xs text-slate-500">TIER 03 / CONTINUITY</div><h3 class="mt-4 text-xl font-semibold">Managed automation & API reliability</h3><div class="mt-6 text-3xl font-bold">$4,000 <span class="text-lg text-slate-500">– $5,000</span></div><div class="mt-2 text-xs text-slate-500">Per month · Ongoing</div><p class="my-6 text-sm leading-7 text-slate-400">Monitoring, maintenance, priority issue handling, and iterative workflow improvements under agreed service levels.</p><a href="#contact" class="mt-auto rounded-lg border border-line px-4 py-3 text-center text-sm">Discuss ongoing support ↗</a></article></div></div></section>
 <section id="contact" class="py-24"><div class="mx-auto max-w-5xl px-5"><div class="rounded-3xl border border-mint/30 bg-gradient-to-br from-mint/10 to-cyan/5 p-8 sm:p-12"><div class="mono text-xs tracking-widest text-mint">LET'S FIND THE FRICTION</div><div class="mt-4 grid gap-8 md:grid-cols-[1fr_auto] md:items-center"><div><h2 class="text-3xl font-bold sm:text-4xl">One workflow. Fifteen minutes. A clearer next step.</h2><p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">Bring one repetitive document process or unreliable integration. We can review the current workflow, identify friction, and discuss whether automation is a practical fit.</p></div><div class="rounded-2xl border border-white/10 bg-ink/80 p-5"><div class="mono text-[10px] text-slate-500">CONTACT / FOUNDER</div><a href="mailto:abraham.automations@gmail.com?subject=15-Minute%20Workflow%20Audit" class="mt-4 block rounded-lg bg-mint px-5 py-3 text-center text-sm font-bold text-ink">Email Abraham ↗</a><p class="mt-4 text-center text-xs text-slate-400">abraham.automations@gmail.com</p><p class="mt-2 text-center text-[10px] text-slate-600">Founded by Abraham Minn</p></div></div></div></div></section></main>
 <footer class="border-t border-white/5 py-8"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-3 px-5 text-xs text-slate-500 sm:flex-row"><span class="font-semibold text-slate-300">◈ OptiLoss Automation</span><span>© 2026 OptiLoss Automation · Founded by Abraham Minn</span><a href="mailto:abraham.automations@gmail.com">Contact ↗</a></div></footer></body></html>
