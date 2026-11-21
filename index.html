@@ -1,6 +1,205 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><meta name="description" content="OptiLoss Automation builds document ingestion pipelines and API reliability guardrails for operations teams."><title>OptiLoss Automation | Document & API Automation</title>
-<script src="https://cdn.tailwindcss.com"></script><script>tailwind.config={theme:{extend:{colors:{ink:'#07111f',panel:'#0c1a2a',line:'#1d3347',mint:'#20d6a0',cyan:'#5bd8f5'}}}}</script><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><style>html{scroll-behavior:smooth}body{background:#152439;font-family:Inter,sans-serif}.gridbg{background-image:linear-gradient(#5bd8f50b 1px,transparent 1px),linear-gradient(90deg,#5bd8f50b 1px,transparent 1px);background-size:44px 44px}.gradient{background:linear-gradient(100deg,#20d6a0,#5bd8f5);background-clip:text;color:transparent}.mono{font-family:'JetBrains Mono',monospace}</style></head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;border:0 solid #e5e7eb}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;min-width:320px;max-width:100%;overflow-x:hidden;background:#152439;color:#f1f5f9;font-family:Inter,sans-serif}
+h1,h2,h3,h4,p{margin:0}a{color:inherit;text-decoration:inherit}
+button{font:inherit;color:inherit;cursor:pointer;background:transparent}button:disabled{cursor:not-allowed}
+pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.mono{font-family:'JetBrains Mono',monospace}
+.gridbg{background-image:linear-gradient(#5bd8f50b 1px,transparent 1px),linear-gradient(90deg,#5bd8f50b 1px,transparent 1px);background-size:44px 44px}
+.gradient{background:linear-gradient(100deg,#20d6a0,#5bd8f5);background-clip:text;-webkit-background-clip:text;color:transparent}
+[class~="space-y-3"]>:not([hidden])~:not([hidden]){margin-top:.75rem}
+[class~="hover:text-cyan"]:hover{color:#5bd8f5}
+@media(max-width:480px){body{overflow-x:hidden}}
+[class~="-z-10"]{z-index:-10}
+[class~="absolute"]{position:absolute}
+[class~="fixed"]{position:fixed}
+[class~="relative"]{position:relative}
+[class~="sticky"]{position:sticky}
+[class~="antialiased"]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+[class~="backdrop-blur-xl"]{-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+[class~="block"]{display:block}
+[class~="hidden"]{display:none}
+[class~="flex"]{display:flex}
+[class~="inline-flex"]{display:inline-flex}
+[class~="grid"]{display:grid}
+[class~="flex-col"]{flex-direction:column}
+[class~="flex-wrap"]{flex-wrap:wrap}
+[class~="flex-1"]{flex:1 1 0%}
+[class~="shrink-0"]{flex-shrink:0}
+[class~="items-center"]{align-items:center}
+[class~="items-start"]{align-items:flex-start}
+[class~="items-stretch"]{align-items:stretch}
+[class~="justify-between"]{justify-content:space-between}
+[class~="place-items-center"]{place-items:center}
+[class~="grid-cols-2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+[class~="grid-cols-[1fr_auto]"]{grid-template-columns:minmax(0,1fr) auto}
+[class~="col-span-2"]{grid-column:span 2 / span 2}
+[class~="gap-2"]{gap:.5rem}
+[class~="gap-3"]{gap:.75rem}
+[class~="gap-5"]{gap:1.25rem}
+[class~="gap-6"]{gap:1.5rem}
+[class~="gap-7"]{gap:1.75rem}
+[class~="gap-8"]{gap:2rem}
+[class~="gap-14"]{gap:3.5rem}
+[class~="gap-x-3"]{column-gap:.75rem}
+[class~="gap-y-3"]{row-gap:.75rem}
+[class~="mx-auto"]{margin-left:auto;margin-right:auto}
+[class~="my-3"]{margin-top:.75rem;margin-bottom:.75rem}
+[class~="my-6"]{margin-top:1.5rem;margin-bottom:1.5rem}
+[class~="mb-3"]{margin-bottom:.75rem}
+[class~="mb-6"]{margin-bottom:1.5rem}
+[class~="mt-1"]{margin-top:.25rem}
+[class~="mt-2"]{margin-top:.5rem}
+[class~="mt-3"]{margin-top:.75rem}
+[class~="mt-4"]{margin-top:1rem}
+[class~="mt-5"]{margin-top:1.25rem}
+[class~="mt-6"]{margin-top:1.5rem}
+[class~="mt-7"]{margin-top:1.75rem}
+[class~="mt-9"]{margin-top:2.25rem}
+[class~="mt-10"]{margin-top:2.5rem}
+[class~="mt-12"]{margin-top:3rem}
+[class~="mt-auto"]{margin-top:auto}
+[class~="ml-8"]{margin-left:2rem}
+[class~="pb-4"]{padding-bottom:1rem}
+[class~="pt-4"]{padding-top:1rem}
+[class~="pt-6"]{padding-top:1.5rem}
+[class~="p-3"]{padding:.75rem}
+[class~="p-4"]{padding:1rem}
+[class~="p-5"]{padding:1.25rem}
+[class~="p-7"]{padding:1.75rem}
+[class~="p-8"]{padding:2rem}
+[class~="px-2"]{padding-left:.5rem;padding-right:.5rem}
+[class~="px-3"]{padding-left:.75rem;padding-right:.75rem}
+[class~="px-4"]{padding-left:1rem;padding-right:1rem}
+[class~="px-5"]{padding-left:1.25rem;padding-right:1.25rem}
+[class~="px-6"]{padding-left:1.5rem;padding-right:1.5rem}
+[class~="py-1"]{padding-top:.25rem;padding-bottom:.25rem}
+[class~="py-1.5"]{padding-top:.375rem;padding-bottom:.375rem}
+[class~="py-2"]{padding-top:.5rem;padding-bottom:.5rem}
+[class~="py-2.5"]{padding-top:.625rem;padding-bottom:.625rem}
+[class~="py-3"]{padding-top:.75rem;padding-bottom:.75rem}
+[class~="py-4"]{padding-top:1rem;padding-bottom:1rem}
+[class~="py-5"]{padding-top:1.25rem;padding-bottom:1.25rem}
+[class~="py-8"]{padding-top:2rem;padding-bottom:2rem}
+[class~="py-24"]{padding-top:6rem;padding-bottom:6rem}
+[class~="h-6"]{height:1.5rem}
+[class~="h-9"]{height:2.25rem}
+[class~="h-full"]{height:100%}
+[class~="w-9"]{width:2.25rem}
+[class~="inset-0"]{top:0;right:0;bottom:0;left:0}
+[class~="top-0"]{top:0}
+[class~="top-5"]{top:1.25rem}
+[class~="right-5"]{right:1.25rem}
+[class~="z-40"]{z-index:40}
+[class~="max-w-xl"]{max-width:36rem;width:100%}
+[class~="max-w-2xl"]{max-width:42rem;width:100%}
+[class~="max-w-3xl"]{max-width:48rem;width:100%}
+[class~="max-w-5xl"]{max-width:64rem;width:100%}
+[class~="max-w-7xl"]{max-width:80rem;width:100%}
+[class~="max-h-80"]{max-height:20rem}
+[class~="min-h-40"]{min-height:10rem}
+[class~="min-w-0"]{min-width:0}
+[class~="overflow-hidden"]{overflow:hidden}
+[class~="break-all"]{overflow-wrap:anywhere;word-break:break-all}
+[class~="whitespace-nowrap"]{white-space:nowrap}
+[class~="rounded-md"]{border-radius:.375rem}
+[class~="rounded-lg"]{border-radius:.5rem}
+[class~="rounded-xl"]{border-radius:.75rem}
+[class~="rounded-2xl"]{border-radius:1rem}
+[class~="rounded-3xl"]{border-radius:1.5rem}
+[class~="rounded-full"]{border-radius:9999px}
+[class~="border"]{border-width:1px;border-style:solid}
+[class~="border-b"]{border-bottom-width:1px;border-style:solid}
+[class~="border-t"]{border-top-width:1px;border-style:solid}
+[class~="border-y"]{border-top-width:1px;border-bottom-width:1px;border-style:solid}
+[class~="border-l"]{border-left-width:1px;border-style:solid}
+[class~="border-dashed"]{border-style:dashed}
+[class~="border-line"]{border-color:#1d3347}
+[class~="border-white/10"]{border-color:rgba(255,255,255,.10)}
+[class~="border-white/5"]{border-color:rgba(255,255,255,.05)}
+[class~="border-cyan/20"]{border-color:rgba(91,216,245,.20)}
+[class~="border-cyan/30"]{border-color:rgba(91,216,245,.30)}
+[class~="border-cyan/50"]{border-color:rgba(91,216,245,.50)}
+[class~="border-mint/25"]{border-color:rgba(32,214,160,.25)}
+[class~="border-mint/30"]{border-color:rgba(32,214,160,.30)}
+[class~="border-mint/50"]{border-color:rgba(32,214,160,.50)}
+[class~="border-rose-400/25"]{border-color:rgba(251,113,133,.25)}
+[class~="bg-ink"]{background-color:#07111f}
+[class~="bg-ink/80"]{background-color:rgba(7,17,31,.80)}
+[class~="bg-ink/90"]{background-color:rgba(7,17,31,.90)}
+[class~="bg-panel/70"]{background-color:rgba(12,26,42,.70)}
+[class~="bg-panel/90"]{background-color:rgba(12,26,42,.90)}
+[class~="bg-mint"]{background-color:#20d6a0}
+[class~="bg-mint/5"]{background-color:rgba(32,214,160,.05)}
+[class~="bg-mint/10"]{background-color:rgba(32,214,160,.10)}
+[class~="bg-mint/[.06]"]{background-color:rgba(32,214,160,.06)}
+[class~="bg-cyan/5"]{background-color:rgba(91,216,245,.05)}
+[class~="bg-rose-400/[.06]"]{background-color:rgba(251,113,133,.06)}
+[class~="bg-white/[.02]"]{background-color:rgba(255,255,255,.02)}
+[class~="bg-white/[.025]"]{background-color:rgba(255,255,255,.025)}
+[class~="bg-white/[.03]"]{background-color:rgba(255,255,255,.03)}
+[class~="bg-white/[.035]"]{background-color:rgba(255,255,255,.035)}
+[class~="bg-[#050d17]"]{background-color:#050d17}
+[class~="bg-gradient-to-br"]{background-image:linear-gradient(to bottom right,rgba(32,214,160,.10),rgba(91,216,245,.05))}
+[class~="text-ink"]{color:#07111f}
+[class~="text-mint"]{color:#20d6a0}
+[class~="text-cyan"]{color:#5bd8f5}
+[class~="text-emerald-200"]{color:#a7f3d0}
+[class~="text-rose-100"]{color:#ffe4e6}
+[class~="text-rose-200"]{color:#fecdd3}
+[class~="text-slate-100"]{color:#f1f5f9}
+[class~="text-slate-200"]{color:#e2e8f0}
+[class~="text-slate-300"]{color:#cbd5e1}
+[class~="text-slate-400"]{color:#94a3b8}
+[class~="text-slate-500"]{color:#64748b}
+[class~="text-slate-600"]{color:#475569}
+[class~="text-left"]{text-align:left}
+[class~="text-center"]{text-align:center}
+[class~="text-right"]{text-align:right}
+[class~="text-[8px]"]{font-size:.5rem;line-height:.75rem}
+[class~="text-[9px]"]{font-size:.5625rem;line-height:.85rem}
+[class~="text-[10px]"]{font-size:.625rem;line-height:.95rem}
+[class~="text-[11px]"]{font-size:.6875rem;line-height:1rem}
+[class~="text-xs"]{font-size:.75rem;line-height:1rem}
+[class~="text-sm"]{font-size:.875rem;line-height:1.25rem}
+[class~="text-base"]{font-size:1rem;line-height:1.5rem}
+[class~="text-lg"]{font-size:1.125rem;line-height:1.75rem}
+[class~="text-xl"]{font-size:1.25rem;line-height:1.75rem}
+[class~="text-3xl"]{font-size:1.875rem;line-height:2.25rem}
+[class~="text-5xl"]{font-size:3rem;line-height:1}
+[class~="font-bold"]{font-weight:700}
+[class~="font-semibold"]{font-weight:600}
+[class~="font-extrabold"]{font-weight:800}
+[class~="tracking-tight"]{letter-spacing:-.025em}
+[class~="tracking-wider"]{letter-spacing:.05em}
+[class~="tracking-widest"]{letter-spacing:.1em}
+[class~="leading-tight"]{line-height:1.25}
+[class~="leading-5"]{line-height:1.25rem}
+[class~="leading-6"]{line-height:1.5rem}
+[class~="leading-7"]{line-height:1.75rem}
+[class~="leading-8"]{line-height:2rem}
+[class~="shadow-2xl"]{box-shadow:0 25px 50px -12px rgba(0,0,0,.25)}
+[class~="shadow-lg"]{box-shadow:0 10px 15px -3px rgba(0,0,0,.10),0 4px 6px -4px rgba(0,0,0,.10)}
+[class~="shadow-mint/10"]{box-shadow:0 10px 25px rgba(32,214,160,.10)}
+[class~="transition"]{transition:color,background-color,border-color,opacity,box-shadow,transform 150ms ease}
+[class~="hover:text-cyan"]{color:#5bd8f5}
+@media(min-width:640px){
+ [class~="sm:flex-row"]{flex-direction:row}[class~="sm:items-center"]{align-items:center}[class~="sm:justify-between"]{justify-content:space-between}
+ [class~="sm:p-7"]{padding:1.75rem}[class~="sm:p-12"]{padding:3rem}[class~="sm:px-7"]{padding-left:1.75rem;padding-right:1.75rem}
+ [class~="sm:text-4xl"]{font-size:2.25rem;line-height:2.5rem}[class~="sm:text-6xl"]{font-size:3.75rem;line-height:1}
+}
+@media(min-width:768px){
+ [class~="md:flex"]{display:flex}[class~="md:grid-cols-2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+ [class~="md:grid-cols-3"]{grid-template-columns:repeat(3,minmax(0,1fr))}[class~="md:grid-cols-[1fr_auto]"]{grid-template-columns:minmax(0,1fr) auto}
+ [class~="md:items-center"]{align-items:center}
+}
+@media(min-width:1024px){
+ [class~="lg:grid-cols-2"]{grid-template-columns:repeat(2,minmax(0,1fr))}[class~="lg:grid-cols-3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+ [class~="lg:grid-cols-12"]{grid-template-columns:repeat(12,minmax(0,1fr))}[class~="lg:col-span-5"]{grid-column:span 5 / span 5}
+ [class~="lg:col-span-7"]{grid-column:span 7 / span 7}[class~="lg:py-32"]{padding-top:8rem;padding-bottom:8rem}
+}</style></head>
 <body class="text-slate-100 antialiased"><div class="fixed inset-0 -z-10 gridbg"></div><header class="sticky top-0 z-40 border-b border-white/10 bg-ink/90 backdrop-blur-xl"><nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4"><a href="#home" class="font-bold">◈ OptiLoss <span class="text-mint">Automation</span></a><div class="hidden gap-7 text-sm text-slate-400 md:flex"><a href="#capabilities">Capabilities</a><a href="#demo">Demo</a><a href="#pricing">Engagement</a></div><a href="#contact" class="rounded-lg bg-mint px-4 py-2.5 text-xs font-bold text-ink">Book a workflow audit ↗</a></nav></header>
 <main id="home"><section class="mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 lg:grid-cols-2 lg:py-32"><div><div class="mb-6 inline-flex rounded-full border border-mint/30 bg-mint/10 px-3 py-2 text-xs text-emerald-200">B2B DOCUMENT & API AUTOMATION PARTNER</div><h1 class="text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl">Eliminate manual PDF data entry and <span class="gradient">silent API failures.</span></h1><p class="mt-7 max-w-xl text-lg leading-8 text-slate-400">OptiLoss Automation builds layout-aware document ingestion pipelines and automated API reliability guardrails for logistics, insurance, and fintech operations teams.</p><div class="mt-9 flex flex-wrap gap-3"><a href="#contact" class="rounded-lg bg-mint px-6 py-4 text-sm font-bold text-ink">Book a 15-minute workflow audit ↗</a><a href="#demo" class="rounded-lg border border-line px-6 py-4 text-sm font-semibold">Explore the demo ↓</a></div><div class="mt-9 flex flex-wrap gap-6 border-t border-white/10 pt-6 text-xs text-slate-500"><span>✓ Deterministic workflows</span><span>✓ Auditable outputs</span><span>✓ Built for operations</span></div></div>
 <div class="rounded-2xl border border-line bg-panel/90 p-5 shadow-2xl"><div class="flex justify-between border-b border-white/10 pb-4"><span class="mono text-xs text-slate-400">optiloss / pipeline.run</span><span class="mono text-[10px] text-mint">● SYSTEM PREVIEW</span></div><div class="mt-5 rounded-xl border border-line bg-ink p-4"><div class="mono text-xs text-cyan">INPUT / DOCUMENT RECEIVED</div><div class="mt-2 font-semibold">inbound_invoice_042.pdf</div><div class="mt-1 text-xs text-slate-500">PDF · 2.4 MB · 4 pages</div></div><div class="my-3 ml-8 h-6 border-l border-dashed border-mint/50"></div><div class="rounded-xl border border-mint/30 bg-mint/5 p-4"><div class="mono text-xs text-mint">01 / EXTRACT + VALIDATE</div><div class="mt-4 grid grid-cols-2 gap-3"><div class="rounded-lg bg-ink p-3"><div class="mono text-[9px] text-slate-500">INVOICE_NO</div><div class="mt-1 text-sm">INV-2026-042</div></div><div class="rounded-lg bg-ink p-3"><div class="mono text-[9px] text-slate-500">TOTAL</div><div class="mt-1 text-sm">$18,420.00</div></div></div><div class="mt-3 text-xs text-emerald-200">✓ Schema checks passed · confidence scored</div></div><div class="my-3 ml-8 h-6 border-l border-dashed border-cyan/50"></div><div class="rounded-xl border border-cyan/30 bg-cyan/5 p-4"><div class="mono text-xs text-cyan">02 / DELIVER + TRACE</div><div class="mt-2 text-sm">Validated payload → ERP / API</div><div class="mt-1 text-xs text-slate-500">Retry policy · audit log · alerting</div></div></div></section>
@@ -34,6 +233,21 @@
     #demo .sim-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#20d6a0,#5bd8f5);transition:width .45s ease}
     #demo .sim-fade{animation:simFade .35s ease both}
     @keyframes simFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    #demo .sim-shell,#demo #sim-workspace,#demo .sim-card,#demo .sim-step,#demo #sim-output-content{min-width:0;max-width:100%}
+    #demo .sim-code{display:block;width:100%;min-width:0;max-width:100%;white-space:pre;overflow-x:auto;overflow-y:auto;overscroll-behavior-x:contain}
+    #demo .sim-tab{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+    #demo .sim-row{grid-template-columns:minmax(0,1fr) auto}
+    #demo .sim-step>div:first-child{min-width:0}
+    #demo #sim-run-status{min-width:0;overflow-wrap:anywhere}
+    #demo .sim-action:focus-visible,#demo .sim-tab:focus-visible{outline:2px solid #5bd8f5;outline-offset:2px}
+    #demo .sim-tab:disabled{cursor:not-allowed;opacity:.55}
+    @media(max-width:480px){
+      #demo .sim-step>div:first-child{flex-wrap:wrap}
+      #demo .sim-step>div:first-child>span:last-child{margin-left:auto}
+      #demo .sim-pill{font-size:8px;padding:.22rem .42rem}
+      #demo .sim-code{font-size:9px;line-height:1.45rem;padding:.75rem}
+      #demo .sim-shell{border-radius:.9rem}
+    }
     @media(prefers-reduced-motion:reduce){#demo *,#demo *:before,#demo *:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
   </style>
 
@@ -66,7 +280,7 @@
         </div>
         <div class="grid gap-3 md:grid-cols-2" role="tablist" aria-label="Invoice scenarios">
           <button id="sim-tab-valid" class="sim-tab rounded-xl p-4 text-left" type="button" role="tab" aria-selected="true" aria-controls="sim-workspace" data-scenario="valid">
-            <span class="flex items-center justify-between gap-3">
+            <span class="flex flex-wrap items-center justify-between gap-3">
               <span class="mono text-[10px] tracking-wider">SCENARIO A</span>
               <span class="sim-pill pass">EXPECTED PASS</span>
             </span>
@@ -74,7 +288,7 @@
             <span class="mt-1 block text-xs text-slate-400">Valid multi-line logistics invoice · $18,420.00</span>
           </button>
           <button id="sim-tab-exception" class="sim-tab rounded-xl p-4 text-left" type="button" role="tab" aria-selected="false" aria-controls="sim-workspace" data-scenario="exception">
-            <span class="flex items-center justify-between gap-3">
+            <span class="flex flex-wrap items-center justify-between gap-3">
               <span class="mono text-[10px] tracking-wider">SCENARIO B</span>
               <span class="sim-pill fail">EXPECTED EXCEPTION</span>
             </span>
@@ -117,7 +331,7 @@
                 <div class="mono text-[10px] tracking-widest text-slate-500">EXTRACTED LINE ITEMS</div>
                 <div id="sim-line-count" class="mono text-[9px] text-slate-500">04 RECORDS</div>
               </div>
-              <div class="mt-2 overflow-hidden rounded-lg border border-white/10">
+              <div class="mt-2 max-w-full overflow-hidden rounded-lg border border-white/10">
                 <div class="grid grid-cols-[1fr_auto] bg-white/[.035] px-3 py-2 mono text-[8px] tracking-wider text-slate-500">
                   <span>CHARGE CODE</span><span>AMOUNT (USD)</span>
                 </div>
@@ -209,9 +423,9 @@
               </div>
             </div>
             <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Choose how to view your results">
-              <button id="sim-output-summary-tab" type="button" role="tab" aria-selected="true" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Simple summary</button>
-              <button id="sim-output-payload-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Technical data (JSON)</button>
-              <button id="sim-output-file-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Generated file</button>
+              <button id="sim-output-summary-tab" type="button" role="tab" aria-selected="true" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Result summary</button>
+              <button id="sim-output-payload-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Structured JSON</button>
+              <button id="sim-output-file-tab" type="button" role="tab" aria-selected="false" aria-controls="sim-output-content" class="sim-tab rounded-lg px-3 py-2 text-[10px] font-semibold">Output / Exception File</button>
             </div>
             <div id="sim-output-content" class="mt-3 overflow-hidden rounded-lg border border-white/10 bg-[#050d17]" role="tabpanel" aria-live="polite">
               <div class="flex items-center justify-between border-b border-white/10 px-3 py-2">
@@ -379,7 +593,11 @@
         el("sim-run").disabled = false;
         el("sim-run").innerHTML = '<span aria-hidden="true">▶</span> Run Pipeline';
         el("sim-copy").disabled = true;
+        el("sim-copy").textContent = "Copy result";
         el("sim-download").disabled = true;
+        el("sim-output-summary-tab").disabled = false;
+        el("sim-output-payload-tab").disabled = false;
+        el("sim-output-file-tab").disabled = false;
         el("sim-output-filename").textContent = "Result summary";
         el("sim-output-state").textContent = "RUN THE PIPELINE";
         el("sim-output-state").className = "mono text-[8px] text-slate-600";
@@ -570,7 +788,7 @@
         el("sim-output-summary").classList.toggle("hidden", !showSummary);
         el("sim-output-code").classList.toggle("hidden", showSummary);
         if (!completed) {
-          el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Technical data (JSON)" : (selected === "valid" ? "audit_log.jsonl" : "INV-2026-043.exception.json");
+          el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Structured JSON" : (selected === "valid" ? "audit_log.jsonl" : "INV-2026-043.exception.json");
           el("sim-output-state").textContent = "RUN THE PIPELINE";
           el("sim-output-state").className = "mono text-[8px] text-slate-600";
           el("sim-output-summary").innerHTML = makeSummaryMarkup();
@@ -579,49 +797,76 @@
             : "The generated file will appear here after the pipeline has run.";
           return;
         }
-        el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Technical data (JSON)" : outputFileName;
+        el("sim-output-filename").textContent = mode === "summary" ? "Result summary" : mode === "payload" ? "Structured JSON" : outputFileName;
         el("sim-output-state").textContent = mode === "summary" ? "RESULT EXPLAINED" : mode === "payload" ? "TECHNICAL VIEW" : "FILE PREVIEW";
         el("sim-output-state").className = "mono text-[8px] text-mint";
         el("sim-output-summary").innerHTML = makeSummaryMarkup();
         el("sim-output-code").textContent = mode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
       }
       async function copyOutput() {
-        if (!completed) return;
+        if (!completed || running) return;
         const text = outputMode === "summary" ? makeSummaryText() : outputMode === "payload" ? JSON.stringify(outputPayload, null, 2) : outputFile;
+        let copied = false;
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
-          } else {
-            const field = document.createElement("textarea");
+            copied = true;
+          }
+        } catch (_clipboardError) {
+          copied = false;
+        }
+        if (!copied) {
+          let field = null;
+          try {
+            field = document.createElement("textarea");
             field.value = text;
+            field.setAttribute("readonly", "");
+            field.setAttribute("aria-hidden", "true");
             field.style.position = "fixed";
+            field.style.left = "-9999px";
+            field.style.top = "0";
             field.style.opacity = "0";
             document.body.appendChild(field);
+            field.focus();
             field.select();
-            document.execCommand("copy");
-            field.remove();
+            field.setSelectionRange(0, field.value.length);
+            copied = typeof document.execCommand === "function" && document.execCommand("copy");
+          } catch (_fallbackError) {
+            copied = false;
+          } finally {
+            if (field && field.parentNode) field.parentNode.removeChild(field);
           }
+        }
+        if (copied) {
           el("sim-copy").textContent = "Copied ✓";
-          window.setTimeout(function () { el("sim-copy").textContent = "Copy result"; }, 1600);
-        } catch (error) {
-          el("sim-copy").textContent = "Copy result unavailable";
+          window.setTimeout(function () { if (el("sim-copy")) el("sim-copy").textContent = "Copy result"; }, 1600);
+        } else {
+          el("sim-copy").textContent = "Copy unavailable";
+          window.setTimeout(function () { if (el("sim-copy")) el("sim-copy").textContent = "Copy result"; }, 2200);
         }
       }
       function downloadOutput() {
-        if (!completed) return;
-        const blob = new Blob([outputFile], { type: "application/json;charset=utf-8" });
+        if (!completed || running || !outputFile) return;
+        const mimeType = outputFileName.endsWith(".jsonl")
+          ? "application/x-ndjson;charset=utf-8"
+          : "application/json;charset=utf-8";
+        const blob = new Blob([outputFile], { type: mimeType });
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement("a");
         anchor.href = url;
         anchor.download = outputFileName;
+        anchor.style.display = "none";
         document.body.appendChild(anchor);
         anchor.click();
-        anchor.remove();
-        URL.revokeObjectURL(url);
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+          if (anchor.parentNode) anchor.parentNode.removeChild(anchor);
+        }, 1200);
       }
       async function runPipeline() {
         if (running) return;
         running = true;
+        resetRun();
         const scenario = currentScenario();
         const sum = lineTotal(scenario);
         const checks = buildChecks(scenario);
@@ -630,67 +875,90 @@
         lastRunAt = runAt;
         el("sim-run").disabled = true;
         el("sim-run").textContent = "RUNNING PIPELINE…";
+        el("sim-tab-valid").disabled = true;
+        el("sim-tab-exception").disabled = true;
+        el("sim-output-summary-tab").disabled = true;
+        el("sim-output-payload-tab").disabled = true;
+        el("sim-output-file-tab").disabled = true;
         el("sim-run-status").textContent = "EXECUTING / EXTRACT";
         el("sim-run-status").className = "mono text-[9px] tracking-wider text-cyan";
-        clearStepBodies();
-        setProgress(0);
-
-        setStepState(1, "is-active", "RUNNING");
-        await delay(700);
-        showStepBody(1,
-          '<div class="grid grid-cols-2 gap-2 sm:grid-cols-3">' +
-          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">INVOICE ID</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.invoiceId + '</div></div>' +
-          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">CURRENCY</div><div class="mono mt-1 text-[10px] text-slate-200">USD</div></div>' +
-          '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">LINE RECORDS</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.lines.length + ' / 4</div></div>' +
-          '</div><div class="mt-3 flex flex-wrap items-center justify-between gap-2"><span class="text-[10px] text-slate-400">Parsed header, PO reference, and four charge codes.</span><span class="mono text-xs font-semibold text-mint">' + scenario.confidence.toFixed(1) + '% CONFIDENCE</span></div>'
-        );
-        setStepState(1, "is-done", "EXTRACTED");
-        setProgress(1);
-
-        el("sim-run-status").textContent = "EXECUTING / VALIDATE";
-        setStepState(2, "is-active", "CHECKING");
-        await delay(850);
-        showStepBody(2, renderChecks(checks) +
-          '<div class="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg ' + (passed ? 'border border-mint/20 bg-mint/[.06]' : 'border border-rose-400/25 bg-rose-400/[.06]') + ' px-3 py-3">' +
-          '<span class="mono text-[9px] tracking-wider ' + (passed ? 'text-emerald-200' : 'text-rose-200') + '">' + (passed ? '[VERIFIED]' : '[QUARANTINED / EXCEPTION]') + '</span>' +
-          '<span class="mono text-[9px] ' + (passed ? 'text-slate-400' : 'text-rose-200') + '">LINE SUM ' + money(sum) + '</span></div>'
-        );
-        setStepState(2, passed ? "is-done" : "is-failed", passed ? "VERIFIED" : "QUARANTINED");
-        setProgress(2);
-
-        el("sim-run-status").textContent = passed ? "EXECUTING / OUTPUT + API ASSERTION" : "GUARDRAIL TRIGGERED / DOWNSTREAM HALTED";
-        setStepState(3, "is-active", "PROCESSING");
-        await delay(850);
-        outputPayload = makePayload(scenario, checks, runAt);
-        const file = createFileContents(outputPayload, scenario, runAt);
-        outputFileName = file.name;
-        outputFile = file.content;
-        if (passed) {
-          showStepBody(3,
-            '<div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-mint/25 bg-mint/[.06] p-3">' +
-            '<div><div class="mono text-[9px] tracking-wider text-mint">SCHEMA ASSERTION RECEIPT</div><div class="mt-1 text-lg font-bold text-emerald-200">200 OK</div><div class="mt-1 text-[10px] text-slate-400">Local webhook contract check · no request sent</div></div>' +
-            '<span class="sim-pill pass">ASSERTION PASSED</span></div>' +
-            '<div class="mt-3 grid gap-2 sm:grid-cols-2"><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">AUDIT OUTPUT</div><div class="mono mt-1 text-[10px] text-slate-200">audit_log.jsonl</div></div><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">DOWNSTREAM GATE</div><div class="mt-1 text-[10px] text-emerald-200">ERP / CRM eligible</div></div></div>'
+        try {
+          setStepState(1, "is-active", "RUNNING");
+          await delay(700);
+          showStepBody(1,
+            '<div class="grid grid-cols-2 gap-2 sm:grid-cols-3">' +
+            '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">INVOICE ID</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.invoiceId + '</div></div>' +
+            '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">CURRENCY</div><div class="mono mt-1 text-[10px] text-slate-200">USD</div></div>' +
+            '<div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">LINE RECORDS</div><div class="mono mt-1 text-[10px] text-slate-200">' + scenario.lines.length + ' / 4</div></div>' +
+            '</div><div class="mt-3 flex flex-wrap items-center justify-between gap-2"><span class="text-[10px] text-slate-400">Parsed header, PO reference, and four charge codes.</span><span class="mono text-xs font-semibold text-mint">' + scenario.confidence.toFixed(1) + '% CONFIDENCE</span></div>'
           );
-          setStepState(3, "is-done", "200 OK");
-          el("sim-run-status").textContent = "COMPLETE / [VERIFIED]";
-          el("sim-run-status").className = "mono text-[9px] tracking-wider text-mint";
-        } else {
-          showStepBody(3,
-            '<div class="rounded-lg border border-rose-400/25 bg-rose-400/[.06] p-3"><div class="flex flex-wrap items-center justify-between gap-2"><div class="mono text-[9px] tracking-wider text-rose-200">DOWNSTREAM DELIVERY BLOCKED</div><span class="sim-pill fail">NO SYNC</span></div><div class="mt-2 text-[11px] leading-5 text-slate-300">ERP and CRM writes are stopped. An exception payload has been generated for review.</div><div class="mt-3 mono break-all text-[10px] text-rose-200">' + file.name + '</div></div>'
+          setStepState(1, "is-done", "EXTRACTED");
+          setProgress(1);
+          el("sim-run-status").textContent = "EXECUTING / VALIDATE";
+          setStepState(2, "is-active", "CHECKING");
+          await delay(850);
+          showStepBody(2, renderChecks(checks) +
+            '<div class="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg ' + (passed ? 'border border-mint/20 bg-mint/[.06]' : 'border border-rose-400/25 bg-rose-400/[.06]') + ' px-3 py-3">' +
+            '<span class="mono text-[9px] tracking-wider ' + (passed ? 'text-emerald-200' : 'text-rose-200') + '">' + (passed ? '[VERIFIED]' : '[QUARANTINED / EXCEPTION]') + '</span>' +
+            '<span class="mono text-[9px] ' + (passed ? 'text-slate-400' : 'text-rose-200') + '">LINE SUM ' + money(sum) + '</span></div>'
           );
-          setStepState(3, "is-failed", "BLOCKED");
-          el("sim-run-status").textContent = "HALTED / [QUARANTINED / EXCEPTION]";
+          setStepState(2, passed ? "is-done" : "is-failed", passed ? "VERIFIED" : "QUARANTINED");
+          setProgress(2);
+          el("sim-run-status").textContent = passed ? "EXECUTING / OUTPUT + API ASSERTION" : "GUARDRAIL TRIGGERED / DOWNSTREAM HALTED";
+          setStepState(3, "is-active", "PROCESSING");
+          await delay(850);
+          outputPayload = makePayload(scenario, checks, runAt);
+          const file = createFileContents(outputPayload, scenario, runAt);
+          outputFileName = file.name;
+          outputFile = file.content;
+          if (passed) {
+            showStepBody(3,
+              '<div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-mint/25 bg-mint/[.06] p-3">' +
+              '<div><div class="mono text-[9px] tracking-wider text-mint">SCHEMA ASSERTION RECEIPT</div><div class="mt-1 text-lg font-bold text-emerald-200">200 OK</div><div class="mt-1 text-[10px] text-slate-400">Local webhook contract check · no request sent</div></div>' +
+              '<span class="sim-pill pass">ASSERTION PASSED</span></div>' +
+              '<div class="mt-3 grid gap-2 sm:grid-cols-2"><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">AUDIT OUTPUT</div><div class="mono mt-1 text-[10px] text-slate-200">audit_log.jsonl</div></div><div class="rounded-lg bg-white/[.03] p-3"><div class="mono text-[8px] text-slate-500">DOWNSTREAM GATE</div><div class="mt-1 text-[10px] text-emerald-200">ERP / CRM eligible</div></div></div>'
+            );
+            setStepState(3, "is-done", "200 OK");
+            el("sim-run-status").textContent = "COMPLETE / [VERIFIED]";
+            el("sim-run-status").className = "mono text-[9px] tracking-wider text-mint";
+          } else {
+            showStepBody(3,
+              '<div class="rounded-lg border border-rose-400/25 bg-rose-400/[.06] p-3"><div class="flex flex-wrap items-center justify-between gap-2"><div class="mono text-[9px] tracking-wider text-rose-200">DOWNSTREAM DELIVERY BLOCKED</div><span class="sim-pill fail">NO SYNC</span></div><div class="mt-2 text-[11px] leading-5 text-slate-300">ERP and CRM writes are stopped. An exception payload has been generated for review.</div><div class="mt-3 mono break-all text-[10px] text-rose-200">' + file.name + '</div></div>'
+            );
+            setStepState(3, "is-failed", "BLOCKED");
+            el("sim-run-status").textContent = "HALTED / [QUARANTINED / EXCEPTION]";
+            el("sim-run-status").className = "mono text-[9px] tracking-wider text-rose-300";
+          }
+          setProgress(3);
+          completed = true;
+          el("sim-copy").disabled = false;
+          el("sim-download").disabled = false;
+          setOutputMode(outputMode);
+        } catch (_pipelineError) {
+          completed = false;
+          outputPayload = null;
+          outputFile = "";
+          outputFileName = "";
+          el("sim-run-status").textContent = "RUN INTERRUPTED / PLEASE RETRY";
           el("sim-run-status").className = "mono text-[9px] tracking-wider text-rose-300";
+          el("sim-output-filename").textContent = "Run status";
+          el("sim-output-state").textContent = "RETRY AVAILABLE";
+          el("sim-output-state").className = "mono text-[8px] text-rose-200";
+          el("sim-output-summary").classList.remove("hidden");
+          el("sim-output-code").classList.add("hidden");
+          el("sim-output-summary").innerHTML = '<div class="rounded-lg border border-rose-400/25 bg-rose-400/[.06] p-4"><div class="text-sm font-semibold text-rose-100">The demo run could not finish.</div><p class="mt-2 text-xs leading-6 text-slate-300">No external systems were contacted. Please select Run Pipeline to try the sample again.</p></div>';
+          el("sim-copy").disabled = true;
+          el("sim-download").disabled = true;
+        } finally {
+          running = false;
+          el("sim-run").disabled = false;
+          el("sim-run").innerHTML = completed ? '<span aria-hidden="true">↻</span> Run Again' : '<span aria-hidden="true">▶</span> Run Pipeline';
+          el("sim-tab-valid").disabled = false;
+          el("sim-tab-exception").disabled = false;
+          el("sim-output-summary-tab").disabled = false;
+          el("sim-output-payload-tab").disabled = false;
+          el("sim-output-file-tab").disabled = false;
         }
-        setProgress(3);
-        completed = true;
-        el("sim-run").disabled = false;
-        el("sim-run").innerHTML = '<span aria-hidden="true">↻</span> Run Again';
-        el("sim-copy").disabled = false;
-        el("sim-download").disabled = false;
-        setOutputMode(outputMode);
-        running = false;
       }
 
       el("sim-tab-valid").addEventListener("click", function () {
@@ -714,5 +982,5 @@
   </script>
 </section>
 <section id="pricing" class="border-y border-white/5 bg-white/[.02] py-24"><div class="mx-auto max-w-7xl px-5"><div class="text-center"><div class="mono text-xs tracking-widest text-mint">ENGAGEMENT MODELS</div><h2 class="mt-4 text-3xl font-bold sm:text-4xl">Start with a workflow. Scale with evidence.</h2><p class="mt-4 text-sm text-slate-400">Indicative pricing. Final scope depends on integrations, data quality, and service levels.</p></div><div class="mt-12 grid items-stretch gap-5 lg:grid-cols-3"><article class="flex flex-col rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-xs text-slate-500">TIER 01 / DISCOVERY</div><h3 class="mt-4 text-xl font-semibold">Workflow bottleneck audit & prototype</h3><div class="mt-6 text-3xl font-bold">$1,500 <span class="text-lg text-slate-500">– $2,500</span></div><div class="mt-2 text-xs text-slate-500">One-time · 1 week</div><p class="my-6 text-sm leading-7 text-slate-400">Workflow review and a focused proof-of-concept using anonymized sample files. Validate feasibility before a production commitment.</p><a href="#contact" class="mt-auto rounded-lg border border-line px-4 py-3 text-center text-sm">Discuss an audit ↗</a></article><article class="relative flex flex-col rounded-2xl border border-mint/50 bg-mint/[.06] p-7"><div class="absolute right-5 top-5 rounded-full bg-mint px-3 py-1 mono text-[9px] font-bold text-ink">MOST POPULAR</div><div class="mono text-xs text-mint">TIER 02 / IMPLEMENTATION</div><h3 class="mt-4 text-xl font-semibold">Production document & API pipeline</h3><div class="mt-6 text-3xl font-bold">$5,000 <span class="text-lg text-slate-400">– $12,000</span></div><div class="mt-2 text-xs text-slate-400">One-time · 3–4 weeks</div><p class="my-6 text-sm leading-7 text-slate-300">Production workflow with extraction, configurable validation, integration, retries, audit trail, and operational handover.</p><a href="#contact" class="mt-auto rounded-lg bg-mint px-4 py-3 text-center text-sm font-bold text-ink">Scope a production build ↗</a></article><article class="flex flex-col rounded-2xl border border-line bg-panel/70 p-7"><div class="mono text-xs text-slate-500">TIER 03 / CONTINUITY</div><h3 class="mt-4 text-xl font-semibold">Managed automation & API reliability</h3><div class="mt-6 text-3xl font-bold">$4,000 <span class="text-lg text-slate-500">– $5,000</span></div><div class="mt-2 text-xs text-slate-500">Per month · Ongoing</div><p class="my-6 text-sm leading-7 text-slate-400">Monitoring, maintenance, priority issue handling, and iterative workflow improvements under agreed service levels.</p><a href="#contact" class="mt-auto rounded-lg border border-line px-4 py-3 text-center text-sm">Discuss ongoing support ↗</a></article></div></div></section>
-<section id="contact" class="py-24"><div class="mx-auto max-w-5xl px-5"><div class="rounded-3xl border border-mint/30 bg-gradient-to-br from-mint/10 to-cyan/5 p-8 sm:p-12"><div class="mono text-xs tracking-widest text-mint">LET'S FIND THE FRICTION</div><div class="mt-4 grid gap-8 md:grid-cols-[1fr_auto] md:items-center"><div><h2 class="text-3xl font-bold sm:text-4xl">One workflow. Fifteen minutes. A clearer next step.</h2><p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">Bring one repetitive document process or unreliable integration. We can review the current workflow, identify friction, and discuss whether automation is a practical fit.</p></div><div class="rounded-2xl border border-white/10 bg-ink/80 p-5"><div class="mono text-[10px] text-slate-500">CONTACT / FOUNDER</div><a href="mailto:abraham.automations@gmail.com?subject=15-Minute%20Workflow%20Audit" class="mt-4 block rounded-lg bg-mint px-5 py-3 text-center text-sm font-bold text-ink">Email Abraham ↗</a><p class="mt-4 text-center text-xs text-slate-400">abraham.automations@gmail.com</p><p class="mt-2 text-center text-[10px] text-slate-600">Founded by Abraham Minn</p></div></div></div></div></section></main>
-<footer class="border-t border-white/5 py-8"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-3 px-5 text-xs text-slate-500 sm:flex-row"><span class="font-semibold text-slate-300">◈ OptiLoss Automation</span><span>© 2026 OptiLoss Automation · Founded by Abraham Minn</span><a href="mailto:abraham.automations@gmail.com">Contact ↗</a></div></footer></body></html>
+<section id="contact" class="py-24"><div class="mx-auto max-w-5xl px-5"><div class="rounded-3xl border border-mint/30 bg-gradient-to-br from-mint/10 to-cyan/5 p-8 sm:p-12"><div class="mono text-xs tracking-widest text-mint">LET'S FIND THE FRICTION</div><div class="mt-4 grid gap-8 md:grid-cols-[1fr_auto] md:items-center"><div><h2 class="text-3xl font-bold sm:text-4xl">One workflow. Fifteen minutes. A clearer next step.</h2><p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">Bring one repetitive document process or unreliable integration. We can review the current workflow, identify friction, and discuss whether automation is a practical fit.</p></div><div class="rounded-2xl border border-white/10 bg-ink/80 p-5"><div class="mono text-[10px] text-slate-500">CONTACT / FOUNDER</div><a href="mailto:abraham.optiloss@gmail.com?subject=15-Minute%20Workflow%20Audit" class="mt-4 block rounded-lg bg-mint px-5 py-3 text-center text-sm font-bold text-ink">Email Abraham ↗</a><p class="mt-4 text-center text-xs text-slate-400">abraham.optiloss@gmail.com</p><p class="mt-2 text-center text-[10px] text-slate-600">Founded by Abraham Minn</p></div></div></div></div></section></main>
+<footer class="border-t border-white/5 py-8"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-3 px-5 text-xs text-slate-500 sm:flex-row"><span class="font-semibold text-slate-300">◈ OptiLoss Automation</span><span>© 2026 OptiLoss Automation · Founded by Abraham Minn</span><a href="mailto:abraham.optiloss@gmail.com">Contact ↗</a></div></footer></body></html>
